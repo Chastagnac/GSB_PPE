@@ -4,19 +4,20 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html>
+<html lang="fr">
     <head>
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name ="descsription" content ="Portfolio d'Adrien Poignard - BTS SIO SLAM">
         <meta name="author" content ="Adrien Poignard">
-        <link rel="icon" href="favicon.ico"> 
+        <link rel="icon" href="favicon.ico">
+        <link href="../css/cv.css" rel="stylesheet" type="text/css"/>
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
               rel="stylesheet"> 
-        <link href="../css/cv.css" rel="stylesheet" type="text/css"/>
+        
         <title>Portfolio d'Adrien Poignard (BTS SIO 2020)</title>
     </head>
     <body>
@@ -48,7 +49,7 @@ and open the template in the editor.
                                 <li role="presentation" class="dropdown-header dropdown-item">
                                     En autonomie</li>
                                 <li role="presentation" class="dropdown-item">
-                                    <a role="menuitem" href="#">Application Android</a>
+                                    <a role="menuitem" href="realisations.html">Application Android</a>
                                 </li>
                                 <li role="presentation" class="dropdown-item">
                                     <a role="menuitem" href="#">Site web</a>
@@ -112,7 +113,7 @@ and open the template in the editor.
                             <img src="../images/Moi.jpg" alt="Ma photo d'identité">   
                         </div>     
                         <div id='cv-intro'>        
-                            <h1>Bonjour, je m'appelle Adrien et voici mon CV</h1>      
+                            <h1>Bonjour, je m'appelle <span>Adrien</span> et voici mon CV</h1>      
                         </div>       
                     </div>     
                 </div>     
@@ -167,7 +168,50 @@ and open the template in the editor.
                             </div>            
                         </li>            
                     </ul>          
+                </div>
+                <div class="rubrique clearfix">
+                    <h2><span class="fa fa-briefcase"></span> Expériences professionnelles</h2>
+                    <div class="experience clearfix">
+                        <div class="col-3">
+                            <div class="lieu">Dev'in Love</div>
+                            <div class="date">2020 (7 sem.)</div>
+                        </div>
+                        <div class="col-9">
+                            <div class="profession">Developpement PHP Symfony 4</div>
+                            <div class="details">Création/mise en œuvre de bundles, création de services,
+                                création de commandes, respect de l'architecture MVC, création de templates
+                                avec Twig, gestion de la persistance avec Doctrine.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="experience clearfix">
+                        <div class="col-3">
+                            <div class="lieu">SCA Info</div>
+                            <div class="date">2019 (6 sem.)</div>
+                        </div>
+                        <div class="col-9">
+                            <div class="profession">Développement JEE</div>
+                            <div class="details">Création/mise en œuvre d'EJB (Entreprise Java Beans),
+                                persistance des données avec JPA, mise en oeuvre du framework MVC JSF
+                                (JavaServer Faces), création de composants graphique avec RichFaces.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="experience clearfix">
+                        <div class="col-3">
+                            <div class="lieu">SCA Info</div>
+                            <div class="date">2018<br>(à distance)</div>
+                        </div>
+                        <div class="col-9">
+                            <div class="profession">Intégration avec Boostrap</div>
+                            <div class="details">Création d'un site vitrine pour présenter l'entreprise et
+                                ses différents projets. Problématique de RWD (Responsive Web Design),
+                                optimisation des contenus, tests multisupports.
+                            </div>
+                        </div>
+                    </div>
                 </div> 
+
                 <!-- Partie droite -->     
 
             </div>       
