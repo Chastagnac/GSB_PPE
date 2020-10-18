@@ -36,8 +36,8 @@ switch ($action) {
             header('Location: index.php');
         } elseif (is_array($comptable)) {
             $id = $comptable['id'];
-            $nom = $visiteur['nom'];
-            $prenom = $visiteur['prenom'];
+            $nom = $comptable['nom'];
+            $prenom = $comptable['prenom'];
             comptableConnecter($id, $nom, $prenom);
             header('Location: index.php');
         } else {
