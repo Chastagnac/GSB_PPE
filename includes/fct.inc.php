@@ -34,6 +34,7 @@ function comptableEstConnecte()
     return isset($_SESSION['idComptable']);
 }
 
+
 /**
  * Enregistre dans une variable session les infos d'un visiteur
  *
