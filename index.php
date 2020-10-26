@@ -40,8 +40,11 @@ switch ($uc) {
     case 'etatFrais':
         include 'controleurs/c_etatFrais.php';
         break;
+    case 'controlerFrais':
+        include 'controleurs/c_validerFrais.php';
     case 'deconnexion':
         include 'controleurs/c_deconnexion.php';
         break;
+    
 }
 require 'vues/v_pied.php';

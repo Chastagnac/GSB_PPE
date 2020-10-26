@@ -92,13 +92,13 @@
                                         Accueil
                                     </a>
                                 </li>
-                                <li <?php if ($uc == 'etatFrais') { ?>class="active"<?php } ?>>
+                                <li <?php if ($uc == 'controlerFrais') { ?>class="active"<?php } ?>>
                                     <a href="index.php?uc=etatFrais&action=validerFrais">
                                         <span class="glyphicon glyphicon-pencil"></span>
                                         Valider les fiches de frais
                                     </a>
                                 </li>
-                                <li <?php if ($uc == 'etatFrais') { ?>class="active"<?php } ?>>
+                                <li <?php if ($uc == 'controlerFrais') { ?>class="active"<?php } ?>>
                                     <a href=".....................................">
                                         <span class="glyphicon glyphicon-list-alt"></span>
                                         Suivre le paiement des fiches de frais
