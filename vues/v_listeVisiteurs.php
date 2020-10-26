@@ -2,7 +2,7 @@
 <div class="row">
     <div class="row">
         <div class="col-md-4">
-            <form action="index.php?uc=etatFrais&action=validerFrais" 
+            <form action="index.php?uc=controlerFrais&action=validerFrais" 
                   method="post" role="form">
                 <div class="form-group">
                     <label for="lstVistiteurs" accesskey="n">Choisir le visiteur : </label>

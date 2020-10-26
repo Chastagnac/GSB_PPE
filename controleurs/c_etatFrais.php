@@ -17,6 +17,7 @@
 $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
 $idVisiteur = $_SESSION['idVisiteur'];
 
+
 switch ($action) {
     case 'selectionnerMois':
         $lesMois = $pdo->getLesMoisDisponibles($idVisiteur);
@@ -42,11 +43,5 @@ switch ($action) {
         $nbJustificatifs = $lesInfosFicheFrais['nbJustificatifs'];
         $dateModif = dateAnglaisVersFrancais($lesInfosFicheFrais['dateModif']);
         include 'vues/v_etatFrais.php';
-    case 'validerFrais':
-        $leVIsiteur = filter_input(INPUT_POST, 'lstVistiteurs', FILTER_SANITIZE_STRING);
-        $lesVisiteurs = $pdo->getLesUtilisateursDisponibles($idVisiteur);
-        $visiteurASelectionner = $leVIsiteur;
-        $lesCles = array_keys($lesVisiteurs);
-        $visiteurASelectionnerr = $lesCles[0];
-        include 'vues/v_listeVisiteurs.php';
+        break;
 }
