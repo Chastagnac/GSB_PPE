@@ -25,6 +25,17 @@ function estConnecte()
 }
 
 /**
+ * Teste si un quelconque comtable est connecté
+ *
+ * @return vrai ou faux
+ */
+function comptableEstConnecte()
+{
+    return isset($_SESSION['idComptable']);
+}
+
+
+/**
  * Enregistre dans une variable session les infos d'un visiteur
  *
  * @param String $idVisiteur ID du visiteur
@@ -39,6 +50,23 @@ function connecter($idVisiteur, $nom, $prenom)
     $_SESSION['nom'] = $nom;
     $_SESSION['prenom'] = $prenom;
 }
+
+/**
+ * Enregistre dans une variable session les infos d'un comptable
+ *
+ * @param String $idVisiteur ID du visiteur
+ * @param String $nom        Nom du visiteur
+ * @param String $prenom     Prénom du visiteur
+ *
+ * @return null
+ */
+function comptableConnecter($idComptable, $nom, $prenom)
+{
+    $_SESSION['idComptable'] = $idComptable;
+    $_SESSION['nom'] = $nom;
+    $_SESSION['prenom'] = $prenom;
+}
+
 
 /**
  * Détruit la session active
