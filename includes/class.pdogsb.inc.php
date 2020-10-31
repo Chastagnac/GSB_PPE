@@ -439,25 +439,26 @@ class PdoGsb {
         return $lesMois;
     }
 
-    public function getLesUtilisateursDisponibles() {
+    public function getUtilisateursDisponibles() {
         $requetePrepare = PdoGSB::$monPdo->prepare(
                 'SELECT visiteur.nom as nom, visiteur.prenom as prenom FROM visiteur '
                 . 'ORDER BY visiteur.nom , visiteur.prenom desc'
         );
         $requetePrepare->execute();
-        $lesVisiteurs = array();
-        while ($laLigne = $requetePrepare->fetch()) {
-            $nom = $laLigne['nom'];
-            $prenom = $laLigne['prenom'];
-            $lesVisiteurs[] = array(
-                'nom' => $nom,
-                'prenom' => $prenom
-            );
-        }
-        return $lesVisiteurs;
+        $laLigne = $requetePrepare->fetchAll();
+        return $laLigne;
     }
 
-
+    public function getIdUtilisateur($nom) {
+        $requetePrepare = PdoGSB::$monPdo->prepare(
+                'SELECT visiteur.id as id from VISITEUR'
+                . 'WHERE id = :unNomVisiteur'
+        );
+        $requetePrepare->bindParam(':unNomVisiteur', $nom, PDO::PARAM_STR);
+        $requetePrepare->execute();
+        $laLigne = $requetePrepare->fetchAll();
+        return $laLigne;
+    }
 
     /**
      * Retourne les informations d'une fiche de frais d'un visiteur pour un
