@@ -456,7 +456,7 @@ class PdoGsb {
         );
         $requetePrepare->bindParam(':unNomVisiteur', $nom, PDO::PARAM_STR);
         $requetePrepare->execute();
-        $laLigne = $requetePrepare->fetchAll();
+        $laLigne = $requetePrepare->fetch();
         return $laLigne;
     }
 
