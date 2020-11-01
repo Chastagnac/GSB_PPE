@@ -451,8 +451,8 @@ class PdoGsb {
 
     public function getIdUtilisateur($nom) {
         $requetePrepare = PdoGSB::$monPdo->prepare(
-                'SELECT visiteur.id as id from VISITEUR'
-                . 'WHERE id = :unNomVisiteur'
+                'SELECT visiteur.id as id from VISITEUR '
+                . 'WHERE nom = :unNomVisiteur'
         );
         $requetePrepare->bindParam(':unNomVisiteur', $nom, PDO::PARAM_STR);
         $requetePrepare->execute();
