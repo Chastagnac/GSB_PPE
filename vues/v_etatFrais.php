@@ -25,7 +25,7 @@
     </div>
 </div>
 <div class="panel panel-info">
-    <div class="panel-heading">Eléments forfaitisés</div>
+    <div class ="panel-heading">Eléments forfaitisés</div>
     <table class="table table-bordered table-responsive">
         <tr>
             <?php

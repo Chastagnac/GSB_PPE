@@ -1,3 +1,4 @@
+
 <div class="row">
     <div class="row">
         <div class="col-md-4">
@@ -10,21 +11,15 @@
                         foreach ($lesVisiteurs as $unVisiteur) {
                             $nom = $unVisiteur['nom'];
                             $prenom = $unVisiteur['prenom'];
-                            if ($nom == $visiteurASelectionner) {
-                                ?>
-                                <option selected value="<?php echo $nom ?>">
-                                    <?php echo $nom . '/' . $prenom ?> </option>
-                                <?php
-                            } else {
-                                ?>
-                                <option value="<?php echo $nom ?>">
-                                    <?php echo $nom . '/' . $prenom ?> </option>
-                                <?php
-                            }
+                            ?>
+                            <option selected value="<?php echo $nom ?>">
+                                <?php echo $nom . '/' . $prenom ?> </option>
+                            <?php
                         }
                         ?> 
 
                     </select>
+                    <br>
                     <input id="ok" type="submit" value="Valider" class="btn btn-success" 
                            role="button">
                     <input id="annuler" type="reset" value="Effacer" class="btn btn-danger" 
@@ -32,7 +27,7 @@
 
                 </div>
             </form>
-            <form action="index.php?uc=controlerFrais&action=validerUtilisateur"
+            <form action="index.php?uc=controlerFrais&action=corrigerFrais"
                   method="post" role="form">
                 <label for="lstMoisVisiteurs" accesskey="n">Mois : </label>
                 <select id="lstMoisVisiteurs" name="lstMoisVisiteurs" class="form-control" style="width: 100px">
@@ -42,18 +37,20 @@
                         $numAnnee = $unMois['numAnnee'];
                         $numMois = $unMois['numMois'];
                         ?>
+                    
                         <option selected value="<?php echo $mois ?>">
                             <?php echo $numMois . '/' . $numAnnee ?> </option>
                         <?php
                     }
                     ?>   
                 </select>
+                <br>
                 <input id="ok" type="submit" value="Valider" class="btn btn-success" 
                        role="button">
                 <input id="annuler" type="reset" value="Effacer" class="btn btn-danger" 
                        role="button">
             </form>
-            <h2>Valider la fiche de frais</h2>
         </div>
     </div>
 </div>
+
