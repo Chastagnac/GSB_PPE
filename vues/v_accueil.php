@@ -27,7 +27,7 @@
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title">
-                    <span class="glyphicon glyphicon-bookmark"></span>
+                    <span class="glyphicon glyphicon-bookmark comptable"></span>
                     Navigation
                 </h3>
             </div>

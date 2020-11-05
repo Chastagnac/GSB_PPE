@@ -23,6 +23,9 @@ switch ($action) {
         $idUtilisateur = $pdo->getIdByMonth($moisVisiteur);
         $idUtilisateur = $idUtilisateur['id'];
         var_dump($idUtilisateur);
+        var_dump($moisVisiteur);
+        array("mois" => $moisVisiteur);
+         var_dump($moisVisiteur);
         $lesMoisUtilisateurs = $pdo->getLesMoisDisponibles($idUtilisateur);
         var_dump($lesMoisUtilisateurs);
         include 'vues/v_listeVisiteurs.php';

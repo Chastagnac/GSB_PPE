@@ -36,13 +36,20 @@
                         $mois = $unMois['mois'];
                         $numAnnee = $unMois['numAnnee'];
                         $numMois = $unMois['numMois'];
-                        ?>
-                    
-                        <option selected value="<?php echo $mois ?>">
-                            <?php echo $numMois . '/' . $numAnnee ?> </option>
-                        <?php
+                        if ($mois == $moisVisiteur) {
+                            ?>
+                            <option selected value="<?php echo $mois ?>">
+                                <?php echo $numMois . '/' . $numAnnee ?> </option>
+                            <?php
+                        } else {
+                            ?>
+                            <option value="<?php echo $mois ?>">
+                                <?php echo $numMois . '/' . $numAnnee ?> </option>
+                            <?php
+                        }
                     }
-                    ?>   
+                    ?>  
+
                 </select>
                 <br>
                 <input id="ok" type="submit" value="Valider" class="btn btn-success" 
