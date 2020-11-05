@@ -14,7 +14,6 @@ switch ($action) {
         $idUtilisateur = $pdo->getIdUtilisateur($leVisiteur);
         $idUtilisateur = $idUtilisateur['id'];
         $lesMoisUtilisateurs = $pdo->getLesMoisDisponibles($idUtilisateur);
-        var_dump($lesMoisUtilisateurs);
         include 'vues/v_listeVisiteurs.php';
         break;
     case 'corrigerFrais':
@@ -22,12 +21,10 @@ switch ($action) {
         $moisVisiteur = filter_input(INPUT_POST, 'lstMoisVisiteurs', FILTER_SANITIZE_STRING);
         $idUtilisateur = $pdo->getIdByMonth($moisVisiteur);
         $idUtilisateur = $idUtilisateur['id'];
-        var_dump($idUtilisateur);
-        var_dump($moisVisiteur);
-        array("mois" => $moisVisiteur);
-         var_dump($moisVisiteur);
+        $leVisiteur = $pdo->getNomById($idUtilisateur);
+        $leVisiteur= $leVisiteur['nom'];
         $lesMoisUtilisateurs = $pdo->getLesMoisDisponibles($idUtilisateur);
-        var_dump($lesMoisUtilisateurs);
         include 'vues/v_listeVisiteurs.php';
         include 'vues/v_etatFraisACorriger.php';
+        
 }

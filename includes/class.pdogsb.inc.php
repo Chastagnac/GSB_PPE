@@ -459,13 +459,24 @@ class PdoGsb {
         $laLigne = $requetePrepare->fetch();
         return $laLigne;
     }
-    
-    public function getIdByMonth($mois){
+
+    public function getIdByMonth($mois) {
         $requetePrepare = PdoGSB::$monPdo->prepare(
                 'SELECT visiteur.id as id from VISITEUR inner join fichefrais '
                 . 'on visiteur.id = fichefrais.idvisiteur where mois = :unMoisVisiteur'
-                );
-         $requetePrepare->bindParam(':unMoisVisiteur', $mois, PDO::PARAM_STR);
+        );
+        $requetePrepare->bindParam(':unMoisVisiteur', $mois, PDO::PARAM_STR);
+        $requetePrepare->execute();
+        $laLigne = $requetePrepare->fetch();
+        return $laLigne;
+    }
+
+    public function getNomById($id) {
+        $requetePrepare = PdoGSB::$monPdo->prepare(
+                'SELECT visiteur.nom as nom from VISITEUR '
+                . 'WHERE id = :IdVisiteur'
+        );
+        $requetePrepare->bindParam(':IdVisiteur', $id, PDO::PARAM_INT);
         $requetePrepare->execute();
         $laLigne = $requetePrepare->fetch();
         return $laLigne;

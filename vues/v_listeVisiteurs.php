@@ -1,4 +1,3 @@
-
 <div class="row">
     <div class="row">
         <div class="col-md-4">
@@ -11,13 +10,20 @@
                         foreach ($lesVisiteurs as $unVisiteur) {
                             $nom = $unVisiteur['nom'];
                             $prenom = $unVisiteur['prenom'];
-                            ?>
-                            <option selected value="<?php echo $nom ?>">
-                                <?php echo $nom . '/' . $prenom ?> </option>
-                            <?php
+                            if ($nom == $leVisiteur) {
+                                ?>
+                                <option selected value ="<?php echo $nom ?>">
+                                    <?php echo $nom . '/' . $prenom ?> </option>
+                                <?php
+                            } else {
+                                ?>
+                                <option value="<?php echo $nom ?>">
+                                    <?php echo $nom . '/' . $prenom ?> </option>
+                                <?php
+                            }
                         }
-                        ?> 
-
+                        ?>
+                        </option>
                     </select>
                     <br>
                     <input id="ok" type="submit" value="Valider" class="btn btn-success" 
