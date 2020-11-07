@@ -17,14 +17,25 @@ switch ($action) {
         include 'vues/v_listeVisiteurs.php';
         break;
     case 'corrigerFrais':
+        $leVisiteur = filter_input(INPUT_POST, 'lstVistiteurs', FILTER_SANITIZE_STRING);
         $lesVisiteurs = $pdo->getUtilisateursDisponibles();
         $moisVisiteur = filter_input(INPUT_POST, 'lstMoisVisiteurs', FILTER_SANITIZE_STRING);
-        $idUtilisateur = $pdo->getIdByMonth($moisVisiteur);
+        //je veux récupérer autre chose que le moi car moi == pour tous
+        var_dump($leVisiteur);
+        //$idUtilisateur = $pdo->getIdByMonth($moisVisiteur);
+        $idUtilisateur = $_SESSION['lstVistiteurs'];
+        var_dump($idUtilisateur);
+        //probleme je recup l'if par le mois il faut autre chose
         $idUtilisateur = $idUtilisateur['id'];
         $leVisiteur = $pdo->getNomById($idUtilisateur);
-        $leVisiteur= $leVisiteur['nom'];
+        $leVisiteur = $leVisiteur['nom'];
         $lesMoisUtilisateurs = $pdo->getLesMoisDisponibles($idUtilisateur);
         include 'vues/v_listeVisiteurs.php';
+
+
+        $lesFraisForfait = $pdo->getLesFraisForfait($idUtilisateur, $moisVisiteur);
+
+
         include 'vues/v_etatFraisACorriger.php';
-        
+        break;
 }

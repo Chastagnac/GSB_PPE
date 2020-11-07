@@ -441,8 +441,10 @@ class PdoGsb {
 
     public function getUtilisateursDisponibles() {
         $requetePrepare = PdoGSB::$monPdo->prepare(
-                'SELECT visiteur.nom as nom, visiteur.prenom as prenom FROM visiteur '
-                . 'ORDER BY visiteur.nom , visiteur.prenom desc'
+                'SELECT visiteur.nom as nom, visiteur.prenom as prenom FROM visiteur INNER JOIN fichefrais '
+                . 'ON visiteur.id = fichefrais.idvisiteur '
+                . 'WHERE fichefrais.mois IS NOT NULL '
+                . 'ORDER BY visiteur.nom , visiteur.prenom desc '
         );
         $requetePrepare->execute();
         $laLigne = $requetePrepare->fetchAll();
