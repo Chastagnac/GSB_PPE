@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="../styles/style.css">
 <div class="row">
     <div class="row">
         <div class="col-md-4">
@@ -23,12 +24,11 @@
                             }
                         }
                         ?>
-                        </option>
                     </select>
                     <br>
-                    <input id="ok" type="submit" value="Valider" class="btn btn-success" 
+                    <input id="btn" type="submit" value="Valider" class="btn-xs" 
                            role="button">
-                    <input id="annuler" type="reset" value="Effacer" class="btn btn-danger" 
+                    <input id="annuler" type="reset" value="Effacer" class="btn-xs" 
                            role="button">
 
                 </div>
@@ -37,7 +37,7 @@
                   method="post" role="form">
                 <label for="lstMoisVisiteurs" accesskey="n">Mois : </label>
                 <select id="lstMoisVisiteurs" name="lstMoisVisiteurs" class="form-control" style="width: 100px">
-                    <?php
+                    <?php   
                     foreach ($lesMoisUtilisateurs as $unMois) {
                         $mois = $unMois['mois'];
                         $numAnnee = $unMois['numAnnee'];
