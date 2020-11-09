@@ -150,6 +150,8 @@ class PdoGsb {
         return $lesLignes;
     }
 
+   
+
     /**
      * Retourne le nombre de justificatif d'un visiteur pour un mois donné
      *
@@ -441,35 +443,13 @@ class PdoGsb {
 
     public function getUtilisateursDisponibles() {
         $requetePrepare = PdoGSB::$monPdo->prepare(
-                'SELECT DISTINCT visiteur.nom as nom, visiteur.prenom as prenom FROM visiteur INNER JOIN fichefrais '
+                'SELECT DISTINCT visiteur.id as idVisiteur, visiteur.nom as nom, visiteur.prenom as prenom FROM visiteur INNER JOIN fichefrais '
                 . 'ON visiteur.id = fichefrais.idvisiteur '
                 . 'WHERE fichefrais.mois IS NOT NULL '
                 . 'ORDER BY visiteur.nom , visiteur.prenom desc '
         );
         $requetePrepare->execute();
         $laLigne = $requetePrepare->fetchAll();
-        return $laLigne;
-    }
-
-    public function getIdUtilisateur($nom) {
-        $requetePrepare = PdoGSB::$monPdo->prepare(
-                'SELECT visiteur.id as id from VISITEUR '
-                . 'WHERE nom = :unNomVisiteur'
-        );
-        $requetePrepare->bindParam(':unNomVisiteur', $nom, PDO::PARAM_STR);
-        $requetePrepare->execute();
-        $laLigne = $requetePrepare->fetch();
-        return $laLigne;
-    }
-
-    public function getIdByMonth($mois) {
-        $requetePrepare = PdoGSB::$monPdo->prepare(
-                'SELECT visiteur.id as id from VISITEUR inner join fichefrais '
-                . 'on visiteur.id = fichefrais.idvisiteur where mois = :unMoisVisiteur'
-        );
-        $requetePrepare->bindParam(':unMoisVisiteur', $mois, PDO::PARAM_STR);
-        $requetePrepare->execute();
-        $laLigne = $requetePrepare->fetch();
         return $laLigne;
     }
 
