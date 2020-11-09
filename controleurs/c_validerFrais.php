@@ -10,15 +10,14 @@ switch ($action) {
     case 'validerUtilisateur':
         $lesVisiteurs = $pdo->getUtilisateursDisponibles();
         
-        $LeVisiteur = filter_input(INPUT_POST, 'lstVistiteurs', FILTER_SANITIZE_STRING);
- 
+        $idVisiteur = filter_input(INPUT_POST, 'idVisiteur', FILTER_SANITIZE_STRING);
+        var_dump($idVisiteur);
         //changer, recupérer le prenom et le nom pour obtenir l'id
         
-        $lesVisiteurs = $pdo->getUtilisateursDisponibles();
-        $idUtilisateur = $pdo->getIdUtilisateur($LeVisiteur);
-        $idUtilisateur = $idUtilisateur['id'];        
-        $_SESSION['idUser'] = $idUtilisateur;
-        $lesMoisUtilisateurs = $pdo->getLesMoisDisponibles($idUtilisateur);        
+        //$idUtilisateur = $pdo->getIdUtilisateur($LeVisiteur);
+        //$idUtilisateur = $idUtilisateur['id'];        
+        $_SESSION['idUser'] = $idVisiteur;
+        $lesMoisUtilisateurs = $pdo->getLesMoisDisponibles($idVisiteur);        
         include 'vues/v_listeVisiteurs.php';
         break;    
     case 'corrigerFrais':

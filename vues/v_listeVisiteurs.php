@@ -5,23 +5,18 @@
             <form action="index.php?uc=controlerFrais&action=validerUtilisateur"
                   method="post" role="form">             
                 <div class="form-group">
-                    <label for="lstVistiteurs" accesskey="n">Choisir le visiteur : </label>
-                    <select id="lstVistiteurs" name="lstVistiteurs" class="form-control" style="width:200px;">
+                    <label for="idVisiteur" accesskey="n">Choisir le visiteur : </label>
+                    <select id="idVisiteur" name="idVisiteur" class="form-control" style="width:200px;">
                         <?php
                         foreach ($lesVisiteurs as $unVisiteur) {
-                            $nom = $unVisiteur['nom'];
-                            $prenom = $unVisiteur['prenom'];
-                            if ($nom == $leVisiteur) {
-                                ?>
-                                <option selected value ="<?php echo $nom ?>">
-                                    <?php echo $nom . '/' . $prenom ?> </option>
-                                <?php
-                            } else {
-                                ?>
-                                <option value="<?php echo $nom ?>">
-                                    <?php echo $nom . '/' . $prenom ?> </option>
-                                <?php
-                            }
+                            $selected = '';
+                            
+                            if (isset($_SESSION['current']) && $_SESSION['current']['id'] == $unVisiteur['id']) {
+                                $selected = "selected";
+                            }                            
+                            echo "<option value ='" . $unVisiteur['id']
+                            . "'" . $selected . ";" .$unVisiteur['nom'] . " "
+                            . $unVisiteur["prenom"] . "</option>";
                         }
                         ?>
                     </select>
@@ -37,7 +32,7 @@
                   method="post" role="form">
                 <label for="lstMoisVisiteurs" accesskey="n">Mois : </label>
                 <select id="lstMoisVisiteurs" name="lstMoisVisiteurs" class="form-control" style="width: 100px">
-                    <?php   
+                    <?php
                     foreach ($lesMoisUtilisateurs as $unMois) {
                         $mois = $unMois['mois'];
                         $numAnnee = $unMois['numAnnee'];
@@ -46,12 +41,12 @@
                             ?>
                             <option selected value="<?php echo $mois ?>">
                                 <?php echo $numMois . '/' . $numAnnee ?> </option>
-                            <?php
+                                <?php
                         } else {
                             ?>
                             <option value="<?php echo $mois ?>">
                                 <?php echo $numMois . '/' . $numAnnee ?> </option>
-                            <?php
+                                <?php
                         }
                     }
                     ?>  
