@@ -27,6 +27,5 @@
     </table>  
 </div>
 <div class="form-group">
-    Nombre de justificatifs : 
-    <input value="<?php echo count($lesFraisHorsForfait); ?>" style="width: 30px;">
+    Nombre de justificatifs : <?php echo count($lesFraisHorsForfait)?>
 </div>

@@ -13,9 +13,9 @@
 }
 
 .btn-xs{
-    margin-left: 50px !important;
+    background-color: black !important;
 }
 
-.row {
-    display: inline-flex;
+.fm1{
+        display: -webkit-inline-box;
 }
