@@ -3444,13 +3444,17 @@ fieldset[disabled] .btn-link:focus {
   font-size: 12px;
   line-height: 1.5;
   border-radius: 3px;
+  
 }
 .btn-xs,
 .btn-group-xs > .btn {
+  background-color: green !important;
+  color : #fff;
   padding: 1px 5px;
   font-size: 12px;
   line-height: 1.5;
   border-radius: 3px;
+
 }
 .btn-block {
   display: block;
@@ -4467,6 +4471,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .navbar-btn.btn-xs {
   margin-top: 14px;
+
   margin-bottom: 14px;
 }
 .navbar-text {

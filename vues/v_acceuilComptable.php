@@ -24,8 +24,8 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
+        <div class="panel panel-primary comptable">
+            <div class="panel-heading comptable1 ">
                 <h3 class="panel-title">
                     <span class="glyphicon glyphicon-bookmark"></span>
                     Navigation
@@ -36,12 +36,12 @@
                     <div class="col-xs-12 col-md-12">
                         <a href="index.php?uc=controlerFrais&action=selectionnerVisiteurs"
                            class="btn btn-success btn-lg" role="button">
-                            <span class="glyphicon glyphicon-pencil"></span>
+                            <span class="glyphicon glyphicon-ok"></span>
                             <br>Valider les fiches de frais</a>
-                        <a href="index.php?uc=suivreFrais&action=selectionnerVisiteurs"
-                           class="btn btn-primary btn-lg" role="button">
-                            <span class="glyphicon glyphicon-list-alt"></span>
-                            <br>Suivre le paiement des fiches de frais</a>
+                        <a href="................"
+                           class="btn btn-primary btn-lg comptable1" role="button">
+                            <span class="glyphicon glyphicon-euro"></span>
+                            <br>Suivre le paiement des fiches de frais</a>                        
                     </div>
                 </div>
             </div>
