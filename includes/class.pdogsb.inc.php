@@ -201,6 +201,7 @@ class PdoGsb {
         return $requetePrepare->fetchAll();
     }
 
+    
     /**
      * Retourne tous les id de la table FraisForfait
      *

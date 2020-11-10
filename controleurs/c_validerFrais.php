@@ -26,4 +26,5 @@ switch ($action) {
         $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $moisVisiteur);
         include 'vues/v_etatFraisHorsForfaitACorriger.php';
         break;
+    
 }
