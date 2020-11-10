@@ -453,6 +453,18 @@ class PdoGsb {
         $laLigne = $requetePrepare->fetchAll();
         return $laLigne;
     }
+    public function getUtilisateursVA(){
+        $requetePrepare = PdoGsb::$monPdo->prepare(
+                'SELECT DISTINCT visiteur.id as idVisiteurVA, visiteur.nom as nom, visiteur.prenom'
+                . ' as prenom from visiteur inner join fichefrais ON visiteur.id = fichefrais.idvisiteur'
+                . ' WHERE fichefrais.idetat = \'VA\' '
+                );
+        $requetePrepare->bindParam(':unId', $id, PDO::PARAM_INT);
+        $requetePrepare->execute();
+        $laLigne = $requetePrepare->fetchAll();
+        return $laLigne;
+              
+    }
 
     public function getNomById($id) {
         $requetePrepare = PdoGSB::$monPdo->prepare(

@@ -99,7 +99,7 @@
                                     </a>
                                 </li>
                                 <li <?php if ($uc == 'controlerFrais') { ?>class="SURVOL"<?php } ?>>
-                                    <a href="....................................." class="entete active">
+                                    <a href="index.php?uc=suivreFrais&action=choisirVisiteur" class="entete active">
                                         <span class="glyphicon glyphicon-euro"></span>
                                         Suivre le paiement des fiches de frais
                                     </a>

@@ -8,9 +8,12 @@
 $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
 $id = $_SESSION['idComptable'];
 switch ($action) {
-    case 'selectionnerVisiteurs':
-        $lesVisiteurs = $pdo->getUtilisateursDisponibles();
+    case 'choisirVisiteur':
+        $lesVisiteursVA = $pdo->getUtilisateursVA();
+        $lesVisiteurs = $pdo->getUtilisateursVA();
+        $idVisiteur = filter_input(INPUT_POST, 'idVisiteurVA', FILTER_SANITIZE_STRING);
+        $_SESSION['idUser'] = $idVisiteur;
+        $lesMoisUtilisateurs = $pdo->getLesMoisDisponibles($idVisiteur);
         include 'vues/v_suivrefrais.php';
-        include 'vues/v_listeVisiteurs.php';
         break;
 }
