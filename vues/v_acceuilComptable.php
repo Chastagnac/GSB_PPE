@@ -24,8 +24,8 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
+        <div class="panel panel-primary comptable">
+            <div class="panel-heading comptable1 ">
                 <h3 class="panel-title">
                     <span class="glyphicon glyphicon-bookmark"></span>
                     Navigation

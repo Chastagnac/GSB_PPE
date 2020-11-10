@@ -441,8 +441,10 @@ class PdoGsb {
 
     public function getUtilisateursDisponibles() {
         $requetePrepare = PdoGSB::$monPdo->prepare(
-                'SELECT visiteur.nom as nom, visiteur.prenom as prenom FROM visiteur '
-                . 'ORDER BY visiteur.nom , visiteur.prenom desc'
+                'SELECT DISTINCT visiteur.nom as nom, visiteur.prenom as prenom FROM visiteur INNER JOIN fichefrais '
+                . 'ON visiteur.id = fichefrais.idvisiteur '
+                . 'WHERE fichefrais.mois IS NOT NULL '
+                . 'ORDER BY visiteur.nom , visiteur.prenom desc '
         );
         $requetePrepare->execute();
         $laLigne = $requetePrepare->fetchAll();
@@ -459,13 +461,24 @@ class PdoGsb {
         $laLigne = $requetePrepare->fetch();
         return $laLigne;
     }
-    
-    public function getIdByMonth($mois){
+
+    public function getIdByMonth($mois) {
         $requetePrepare = PdoGSB::$monPdo->prepare(
                 'SELECT visiteur.id as id from VISITEUR inner join fichefrais '
                 . 'on visiteur.id = fichefrais.idvisiteur where mois = :unMoisVisiteur'
-                );
-         $requetePrepare->bindParam(':unMoisVisiteur', $mois, PDO::PARAM_STR);
+        );
+        $requetePrepare->bindParam(':unMoisVisiteur', $mois, PDO::PARAM_STR);
+        $requetePrepare->execute();
+        $laLigne = $requetePrepare->fetch();
+        return $laLigne;
+    }
+
+    public function getNomById($id) {
+        $requetePrepare = PdoGSB::$monPdo->prepare(
+                'SELECT visiteur.nom as nom from VISITEUR '
+                . 'WHERE id = :IdVisiteur'
+        );
+        $requetePrepare->bindParam(':IdVisiteur', $id, PDO::PARAM_INT);
         $requetePrepare->execute();
         $laLigne = $requetePrepare->fetch();
         return $laLigne;

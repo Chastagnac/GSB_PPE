@@ -4,5 +4,14 @@
 
 
 .comptable{
-    background-color: orange !important;
+    border-color:  orange !important;
+}
+
+.comptable1{
+     border-color:  orange !important;
+    background-color:  orange !important;
+}
+
+.btn-xs{
+    margin-left: 50px !important;
 }
