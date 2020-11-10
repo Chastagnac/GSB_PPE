@@ -4,5 +4,35 @@
 
 
 .comptable{
+    border-color:  orange !important;
+}
+.entete{
+    color : orange;
+}
+.SURVOL:active{
+       background-color: orange !important;
+    color : white;
+}
+.entete:hover{
     background-color: orange !important;
+    color : white;
+}
+
+.comptable1{
+    border-color:  orange !important;
+    background-color:  orange !important;
+}
+
+.btn-xs{
+    background-color: black !important;
+}
+
+
+
+.-success{
+    display: block !important;
+    margin-left: 20px !important;
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
 }
