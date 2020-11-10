@@ -15,15 +15,20 @@ switch ($action) {
         $moisVisiteur = filter_input(INPUT_POST, 'lstMoisVisiteurs', FILTER_SANITIZE_STRING);
         $_SESSION['mois'] = $moisVisiteur;
         $idVisiteur = $_SESSION['idUser'];
-        $lesMoisUtilisateurs = $pdo->getLesMoisDisponibles($_SESSION['idUser']);
-        $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $moisVisiteur);
+        $lesMoisUtilisateurs = $pdo->getLesMoisDisponibles($idVisiteur);
         $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $moisVisiteur);
-        include 'vues/v_listeVisiteurs.php';
-        include 'vues/v_etatFraisACorriger.php';
-        include 'vues/v_etatFraisHorsForfaitACorriger.php';
+        $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $moisVisiteur);
+        if (count($lesFraisForfait) == 0) {
+            include 'vues/v_listeVisiteurs.php';
+            include 'vues/v_aucuneFiche.php';
+        } else {
+            include 'vues/v_listeVisiteurs.php';
+            include 'vues/v_etatFraisACorriger.php';
+            include 'vues/v_etatFraisHorsForfaitACorriger.php';
+        }
         break;
 
-    case 'modifierMajFraisForfait':
+    case 'MajFraisForfait':
         $lesFrais = filter_input(INPUT_POST, 'lesFrais', FILTER_DEFAULT, FILTER_FORCE_ARRAY);
         $lesMoisUtilisateurs = $pdo->getLesMoisDisponibles($_SESSION['idUser']);
         $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($_SESSION['idUser'], $_SESSION['mois']);
@@ -34,6 +39,17 @@ switch ($action) {
             ajouterErreur('Les valeurs des frais doivent être numériques');
             include 'vues/v_erreurs.php';
         }
+        include 'vues/v_listeVisiteurs.php';
+        include 'vues/v_etatFraisACorriger.php';
+        include 'vues/v_etatFraisHorsForfaitACorriger.php';
+        break;
+    case 'MajFraisHorsForfait':
+        $lesFrais = filter_input(INPUT_POST, 'lesFrais', FILTER_DEFAULT, FILTER_FORCE_ARRAY);
+        $lesMoisUtilisateurs = $pdo->getLesMoisDisponibles($_SESSION['idUser']);
+        $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($_SESSION['idUser'], $_SESSION['mois']);
+        $lesFraisForfait = $pdo->getLesFraisForfait($_SESSION['idUser'], $_SESSION['mois']);
+        
+        
         include 'vues/v_listeVisiteurs.php';
         include 'vues/v_etatFraisACorriger.php';
         include 'vues/v_etatFraisHorsForfaitACorriger.php';

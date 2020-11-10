@@ -4,7 +4,7 @@
     <h3>Eléments forfaitisés</h3>
     <div class="col-md-4">
         <form method="post" 
-              action="index.php?uc=controlerFrais&action=modifierMajFraisForfait" 
+              action="index.php?uc=controlerFrais&action=MajFraisForfait" 
               role="form" style="width:200px;">
             <fieldset>       
                 <?php
