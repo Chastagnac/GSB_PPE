@@ -36,12 +36,12 @@
                     <div class="col-xs-12 col-md-12">
                         <a href="index.php?uc=controlerFrais&action=selectionnerVisiteurs"
                            class="btn btn-success btn-lg" role="button">
-                            <span class="glyphicon glyphicon-pencil"></span>
+                            <span class="glyphicon glyphicon-ok"></span>
                             <br>Valider les fiches de frais</a>
                         <a href="................"
-                           class="btn btn-primary btn-lg" role="button">
-                            <span class="glyphicon glyphicon-list-alt"></span>
-                            <br>Suivre le paiement des fiches de frais</a>
+                           class="btn btn-primary btn-lg comptable1" role="button">
+                            <span class="glyphicon glyphicon-euro"></span>
+                            <br>Suivre le paiement des fiches de frais</a>                        
                     </div>
                 </div>
             </div>

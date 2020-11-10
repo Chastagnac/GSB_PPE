@@ -5,7 +5,7 @@
     <div class="col-md-4">
         <form method="post" 
               action="index.php?uc=validerFrais=corrigerFrais" 
-              role="form" style="width:150px;">
+              role="form" style="width:200px;">
             <fieldset>       
                 <?php
                 foreach ($lesFraisForfait as $unFrais) {
@@ -26,6 +26,9 @@
                 ?>
                 <button class="btn btn-success" type="submit">Corriger</button>
                 <button class="btn btn-danger" type="reset">Reset</button>
+
+
+
             </fieldset>
         </form>
     </div>

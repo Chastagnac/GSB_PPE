@@ -4,7 +4,7 @@
         <div class="col-md-4">
             <form action="index.php?uc=controlerFrais&action=validerUtilisateur"
                   method="post" role="form">             
-                <div class="form-group fm1">
+                <div class="form-group">
                     <label for="idVisiteur" accesskey="n">Choisir le visiteur : </label>
                     <select id="idVisiteur" name="idVisiteur" class="form-control" style="width:200px;">
                         <?php
@@ -28,14 +28,14 @@
 
                     </select>
                     <br>
-                    <input id="btn" type="submit" value="Valider" class="btn-xs" 
+                    <input id="btn" type="submit" value="Valider" class="btn btn-success" 
                            role="button">
 
 
                 </div>
             </form>
                 <form action="index.php?uc=controlerFrais&action=corrigerFrais"
-                      method="post" role="form" class="fm1">
+                      method="post" role="form">
                     <label for="lstMoisVisiteurs" accesskey="n">Mois : </label>
                     <select id="lstMoisVisiteurs" name="lstMoisVisiteurs" class="form-control" style="width: 100px">
                         <?php
@@ -59,7 +59,7 @@
 
                     </select>
                     <br>
-                    <input id="ok" type="submit" value="Valider" class="btn-xs" 
+                    <input id="ok" type="submit" value="Valider" class="btn btn-success" 
                            role="button">
                 </form>
         </div>
