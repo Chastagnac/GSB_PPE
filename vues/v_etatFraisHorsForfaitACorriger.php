@@ -15,9 +15,9 @@
             $montant = $unFraisHorsForfait['montant'];
             ?>
             <tr>
-                <td><?php echo $date ?></td>
-                <td><?php echo $libelle ?></td>
-                <td><?php echo $montant ?></td>
+                <td><input type="text" value="<?php echo $date ?>" size="10px"></td>
+                <td><input type="text" value="<?php echo $libelle ?>"></td>
+                <td><input type="text" value="<?php echo $montant ?>"></td>
                 <td>  <button class="btn btn-success" type="submit">Corriger</button>
                     <button class="btn btn-danger" type="reset">Reset</button></td>
             </tr>
