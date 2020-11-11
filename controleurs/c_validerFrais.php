@@ -33,6 +33,7 @@ switch ($action) {
         $lesMoisUtilisateurs = $pdo->getLesMoisDisponibles($_SESSION['idUser']);
         $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($_SESSION['idUser'], $_SESSION['mois']);
         $lesFraisForfait = $pdo->getLesFraisForfait($_SESSION['idUser'], $_SESSION['mois']);
+     
         if (lesQteFraisValides($lesFrais)) {
             $pdo->majFraisForfait($_SESSION['idUser'], $_SESSION['mois'], $lesFrais);
         } else {
@@ -47,8 +48,8 @@ switch ($action) {
         $lesFrais = filter_input(INPUT_POST, 'lesFrais', FILTER_DEFAULT, FILTER_FORCE_ARRAY);
         $lesMoisUtilisateurs = $pdo->getLesMoisDisponibles($_SESSION['idUser']);
         $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($_SESSION['idUser'], $_SESSION['mois']);
-        $lesFraisForfait = $pdo->getLesFraisForfait($_SESSION['idUser'], $_SESSION['mois']);
-        
+        $lesFraisForfait = $pdo->getLesFraisForfait($_SESSION['idUser'], $_SESSION['mois']);    
+           var_dump($lesFrais);
         
         include 'vues/v_listeVisiteurs.php';
         include 'vues/v_etatFraisACorriger.php';
