@@ -13,10 +13,15 @@ switch ($action) {
 
     case 'corrigerFrais':
         $moisVisiteur = filter_input(INPUT_POST, 'lstMoisVisiteurs', FILTER_SANITIZE_STRING);
-        $_SESSION['mois'] = $moisVisiteur;
+        $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($_SESSION['idUser'], $moisVisiteur);
+        $nbJustificatifs = $lesInfosFicheFrais['nbJustificatifs'];
+        $_SESSION['nbJustificatifV'] = $nbJustificatifs;
+        $_SESSION['mois'] = $moisVisiteur;        
+        
         $lesMoisVisiteurs = $pdo->getLesMoisDisponibles($_SESSION['idUser']);
         $lesFraisForfait = $pdo->getLesFraisForfait($_SESSION['idUser'], $moisVisiteur);
         $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($_SESSION['idUser'], $moisVisiteur);
+        
         if (count($lesFraisForfait) == 0) {
             include 'vues/v_listeVisiteurs.php';
             include 'vues/v_aucuneFiche.php';
@@ -29,6 +34,7 @@ switch ($action) {
 
     case 'MajFraisForfait':
         $lesFrais = filter_input(INPUT_POST, 'lesFrais', FILTER_DEFAULT, FILTER_FORCE_ARRAY);
+        var_dump($lesFrais);
         $lesMoisVisiteurs = $pdo->getLesMoisDisponibles($_SESSION['idUser']);
         if (lesQteFraisValides($lesFrais)) {
             $pdo->majFraisForfait($_SESSION['idUser'], $_SESSION['mois'], $lesFrais);
@@ -48,13 +54,13 @@ switch ($action) {
         $dateHF = filter_input(INPUT_POST, 'date', FILTER_SANITIZE_STRING);
         $libelleHF = filter_input(INPUT_POST, 'libelle', FILTER_SANITIZE_STRING);
         $montantHF = filter_input(INPUT_POST, 'montant', FILTER_SANITIZE_STRING);
-            $pdo->majFraisHorsForfait($_SESSION['idFraisHorsForfait'], $libelleHF, $dateHF, $montantHF);
+        $pdo->majFraisHorsForfait($_SESSION['idFraisHorsForfait'], $libelleHF, $dateHF, $montantHF);
 
 
         $lesMoisVisiteurs = $pdo->getLesMoisDisponibles($_SESSION['idUser']);
         $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($_SESSION['idUser'], $_SESSION['mois']);
         $lesFraisForfait = $pdo->getLesFraisForfait($_SESSION['idUser'], $_SESSION['mois']);
-        var_dump($libelleHF);
+
 
 
         include 'vues/v_listeVisiteurs.php';

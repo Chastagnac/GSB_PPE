@@ -35,7 +35,7 @@
     </div>
 </form>
 <div class="form-group">
-    Nombre de justificatifs : <?php echo count($lesFraisHorsForfait) ?>
+    Nombre de justificatifs : <?php echo $_SESSION['nbJustificatifV'] ?>
 </div>
 
 
