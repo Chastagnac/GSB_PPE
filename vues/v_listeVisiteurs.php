@@ -25,7 +25,7 @@
                             $idVi = $unVisiteur['idVisiteur'];
                             $nom = $unVisiteur['nom'];
                             $prenom = $unVisiteur['prenom'];
-                            if ($idVi == $idVisiteur) {
+                            if ($idVi == $_SESSION['idUser']) {
                                 ?>
                                 <option selected value="<?php echo $idVi ?>">
                                     <?php echo $nom . '/' . $prenom ?> </option>
@@ -53,11 +53,11 @@
                 <label for="lstMoisVisiteurs" accesskey="n">Mois : </label>
                 <select id="lstMoisVisiteurs" name="lstMoisVisiteurs" class="form-control" style="width: 100px">
                     <?php
-                    foreach ($lesMoisUtilisateurs as $unMois) {
+                    foreach ($lesMoisVisiteurs as $unMois) {
                         $mois = $unMois['mois'];
                         $numAnnee = $unMois['numAnnee'];
                         $numMois = $unMois['numMois'];
-                        if ($mois == $moisVisiteur) {
+                        if ($mois == $_SESSION['mois']) {
                             ?>
                             <option selected value="<?php echo $mois ?>">
                                 <?php echo $numMois . '/' . $numAnnee ?> </option>

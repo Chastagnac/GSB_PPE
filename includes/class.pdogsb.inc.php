@@ -150,8 +150,6 @@ class PdoGsb {
         return $lesLignes;
     }
 
-   
-
     /**
      * Retourne le nombre de justificatif d'un visiteur pour un mois donné
      *
@@ -201,7 +199,6 @@ class PdoGsb {
         return $requetePrepare->fetchAll();
     }
 
-    
     /**
      * Retourne tous les id de la table FraisForfait
      *
@@ -245,6 +242,22 @@ class PdoGsb {
             $requetePrepare->bindParam(':idFrais', $unIdFrais, PDO::PARAM_STR);
             $requetePrepare->execute();
         }
+    }
+
+    public function majFraisHorsForfait($idFrais, $libelle, $date, $montant) {
+
+        $requetePrepare = PdoGSB::$monPdo->prepare(
+                'UPDATE lignefraishorsforfait'
+                . ', SET lignefraishorsforfait.libelle = :unLibelle'
+                . ', lignefraishorsforfait.date = :uneDate'
+                . ', lignefraishorsforfait.montant = :unMontant'
+                . ' WHERE lignefraishorsforfait.id = :unId'
+        );
+        $requetePrepare->bindParam(':unId', $idFrais, PDO::PARAM_INT);
+        $requetePrepare->bindParam(':unLibelle', $libelle, PDO::PARAM_STR);
+        $requetePrepare->bindParam(':uneDate', $date, PDO::PARAM_STR);
+        $requetePrepare->bindParam(':unMontant', $montant, PDO::PARAM_STR);
+        $requetePrepare->execute();
     }
 
     /**

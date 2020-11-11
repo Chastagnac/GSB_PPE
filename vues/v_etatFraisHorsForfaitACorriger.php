@@ -14,15 +14,18 @@
             </tr>
             <?php
             foreach ($lesFraisHorsForfait as $unFraisHorsForfait) {
+                $id = $unFraisHorsForfait['id'];
+                $_SESSION['idFraisHorsForfait'] = $id;
                 $date = $unFraisHorsForfait['date'];
+
                 $libelle = htmlspecialchars($unFraisHorsForfait['libelle']);
                 $montant = $unFraisHorsForfait['montant'];
                 ?>
                 <tr>
-                    <td><input type="text" value="<?php echo $date ?>" size="10"></td>
-                    <td><input type="text" value="<?php echo $libelle ?>" size="50"></td>
-                    <td><input type="text" value="<?php echo $montant ?>" size="10"></td>
-                    <td>  <button class="btn btn-success" type="submit">Corriger</button>
+                    <td><input type="text" name="date" value="<?php echo $date ?>" size="10"></td>
+                    <td><input type="text" name="libelle" value="<?php echo $libelle ?>" size="50"></td>
+                    <td><input type="text" name="montant" value="<?php echo $montant ?>" size="10"></td>
+                    <td><button class="btn btn-success" type="submit">Corriger</button>
                         <button class="btn btn-danger" type="reset">Reset</button></td>
                 </tr>
                 <?php
