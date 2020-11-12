@@ -16,12 +16,12 @@ switch ($action) {
         $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($_SESSION['idUser'], $moisVisiteur);
         $nbJustificatifs = $lesInfosFicheFrais['nbJustificatifs'];
         $_SESSION['nbJustificatifV'] = $nbJustificatifs;
-        $_SESSION['mois'] = $moisVisiteur;        
-        
+        $_SESSION['mois'] = $moisVisiteur;
+
         $lesMoisVisiteurs = $pdo->getLesMoisDisponibles($_SESSION['idUser']);
         $lesFraisForfait = $pdo->getLesFraisForfait($_SESSION['idUser'], $moisVisiteur);
         $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($_SESSION['idUser'], $moisVisiteur);
-        
+
         if (count($lesFraisForfait) == 0) {
             include 'vues/v_listeVisiteurs.php';
             include 'vues/v_aucuneFiche.php';
@@ -51,17 +51,12 @@ switch ($action) {
         include 'vues/v_etatFraisHorsForfaitACorriger.php';
         break;
     case 'MajFraisHorsForfait':
-        $dateHF = filter_input(INPUT_POST, 'date', FILTER_SANITIZE_STRING);
-        $libelleHF = filter_input(INPUT_POST, 'libelle', FILTER_SANITIZE_STRING);
-        $montantHF = filter_input(INPUT_POST, 'montant', FILTER_SANITIZE_STRING);
-        $pdo->majFraisHorsForfait($_SESSION['idFraisHorsForfait'], $libelleHF, $dateHF, $montantHF);
-
+        $idFraisHF = filter_input(INPUT_GET, 'idFraisHF', FILTER_SANITIZE_STRING);
+        $pdo->majFraisHorsForfait($idFraisHF, $libelleHF, $dateHF, $montantHF);
 
         $lesMoisVisiteurs = $pdo->getLesMoisDisponibles($_SESSION['idUser']);
         $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($_SESSION['idUser'], $_SESSION['mois']);
         $lesFraisForfait = $pdo->getLesFraisForfait($_SESSION['idUser'], $_SESSION['mois']);
-
-
 
         include 'vues/v_listeVisiteurs.php';
         include 'vues/v_etatFraisACorriger.php';
