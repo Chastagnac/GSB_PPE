@@ -33,7 +33,7 @@
         </table>  
     </div>
 </form>
-<div class="form-group">
+<div class="form-group"q>
     Nombre de justificatifs : <?php echo $_SESSION['nbJustificatifV'] ?>
 </div>
 
