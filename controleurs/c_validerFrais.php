@@ -50,16 +50,19 @@ switch ($action) {
         include 'vues/v_etatFraisHorsForfaitACorriger.php';
         break;
     case 'MajFraisHorsForfait':
-        $idFraisHF = filter_input(INPUT_GET, 'idFraisHF', FILTER_SANITIZE_STRING);
-        $leFraisHF = $pdo->getFraisHorsForfait($idFraisHF);        
-        var_dump($leFraisHF);
-        $pdo->majFraisHorsForfait($idFraisHF, $leFraisHF['libelle'], $leFraisHF['date'], $leFraisHF['montant']);
-        
-        $lesMoisVisiteurs = $pdo->getLesMoisDisponibles($_SESSION['idUser']);
         $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($_SESSION['idUser'], $_SESSION['mois']);
+        $idFraisHF = filter_input(INPUT_GET, 'idFraisHF', FILTER_SANITIZE_STRING);
+
+        $libelleHF = filter_input(INPUT_POST, 'libelle', FILTER_SANITIZE_STRING);
+        var_dump($libelleHF);
+        //$leFraisHF = $pdo->getFraisHorsForfait($idFraisHF);
+        //var_dump($leFraisHF);
+        //$pdo->majFraisHorsForfait($idFraisHF, $leFraisHF['libelle'], $leFraisHF['date'], $leFraisHF['montant']);
+
+        $lesMoisVisiteurs = $pdo->getLesMoisDisponibles($_SESSION['idUser']);
         $lesFraisForfait = $pdo->getLesFraisForfait($_SESSION['idUser'], $_SESSION['mois']);
 
-        
+
         include 'vues/v_listeVisiteurs.php';
         include 'vues/v_etatFraisACorriger.php';
         include 'vues/v_etatFraisHorsForfaitACorriger.php';
