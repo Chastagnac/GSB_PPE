@@ -255,18 +255,17 @@ class PdoGsb {
     }
 
     public function majFraisHorsForfait($idFrais, $libelle, $date, $montant) {
-
         $requetePrepare = PdoGSB::$monPdo->prepare(
-                'UPDATE lignefraishorsforfait'
-                . ' SET lignefraishorsforfait.libelle = :unLibelle'
-                . ' WHERE lignefraishorsforfait.id = :unId'
-                . ' AND lignefraishorsforfait.date = :uneDate'
-                . ' AND lignefraishorsforfait.montant = :unMontant'
+                'UPDATE lignefraishorsforfait '
+                . ' SET lignefraishorsforfait.libelle = :unLibelle '
+                . ',lignefraishorsforfait.date = :uneDate '
+                . ',lignefraishorsforfait.montant = :unMontant '
+                . 'WHERE lignefraishorsforfait.id = :unId'
         );
         $requetePrepare->bindParam(':unId', $idFrais, PDO::PARAM_INT);
         $requetePrepare->bindParam(':unLibelle', $libelle, PDO::PARAM_STR);
         $requetePrepare->bindParam(':uneDate', $date, PDO::PARAM_STR);
-        $requetePrepare->bindParam(':unMontant', $montant, PDO::PARAM_STR);
+        $requetePrepare->bindParam(':unMontant', $montant, PDO::PARAM_INT);
         $requetePrepare->execute();
     }
 
