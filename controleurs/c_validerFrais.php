@@ -51,13 +51,11 @@ switch ($action) {
         break;
     case 'MajFraisHorsForfait':
         $idFraisHF = filter_input(INPUT_GET, 'idFraisHF', FILTER_SANITIZE_STRING);
-
-
         $date = filter_input(INPUT_POST, 'date', FILTER_SANITIZE_STRING);
         $date = dateFrancaisVersAnglais($date);
         $montantHF = filter_input(INPUT_POST, 'montant', FILTER_SANITIZE_STRING);
         $libelleHF = filter_input(INPUT_POST, 'libelle', FILTER_SANITIZE_STRING);
-        
+
         $pdo->majFraisHorsForfait($idFraisHF, $libelleHF, $date, $montantHF);
 
 
@@ -68,5 +66,16 @@ switch ($action) {
         include 'vues/v_listeVisiteurs.php';
         include 'vues/v_etatFraisACorriger.php';
         include 'vues/v_etatFraisHorsForfaitACorriger.php';
+        break;
+    case 'ValiderFrais':
+
+        $lesMoisVisiteurs = $pdo->getLesMoisDisponibles($_SESSION['idUser']);
+        $lesFraisForfait = $pdo->getLesFraisForfait($_SESSION['idUser'], $_SESSION['mois']);
+        $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($_SESSION['idUser'], $_SESSION['mois']);
+
+        include 'vues/v_listeVisiteurs.php';
+        include 'vues/v_etatFraisACorriger.php';
+        include 'vues/v_etatFraisHorsForfaitACorriger.php';
+
         break;
 }

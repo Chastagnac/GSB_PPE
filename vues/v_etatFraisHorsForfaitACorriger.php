@@ -16,6 +16,7 @@
             $date = $unFraisHorsForfait['date'];
             $montant = $unFraisHorsForfait['montant'];
             $id = $unFraisHorsForfait['id'];
+            $total = 0
             ?>
             <form method="post" 
                   action="index.php?uc=controlerFrais&action=MajFraisHorsForfait&idFraisHF=<?php echo $id ?>">
@@ -39,5 +40,11 @@
 <div class="form-group">
     Nombre de justificatifs : <?php echo $_SESSION['nbJustificatifV'] ?>
 </div>
+<form method="post" 
+      action="index.php?uc=controlerFrais&action=ValiderFrais" 
+      role="form" style="width:200px;">
+    
+    <button class="btn btn-success" type="submit">Valider la fiche de frais</button>
+</form>
 
 
