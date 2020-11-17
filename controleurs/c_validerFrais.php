@@ -54,11 +54,10 @@ switch ($action) {
 
 
         $date = filter_input(INPUT_POST, 'date', FILTER_SANITIZE_STRING);
+        $date = dateFrancaisVersAnglais($date);
         $montantHF = filter_input(INPUT_POST, 'montant', FILTER_SANITIZE_STRING);
         $libelleHF = filter_input(INPUT_POST, 'libelle', FILTER_SANITIZE_STRING);
-
-        var_dump($date);
-        //changer format date
+        
         $pdo->majFraisHorsForfait($idFraisHF, $libelleHF, $date, $montantHF);
 
 
