@@ -13,7 +13,6 @@ switch ($action) {
         $lesVisiteurs = $pdo->getUtilisateursVA();
         $idVisiteur = filter_input(INPUT_POST, 'idVisiteurVA', FILTER_SANITIZE_STRING);
         $_SESSION['idUser'] = $idVisiteur;
-        $lesMoisUtilisateurs = $pdo->getLesMoisDisponibles($idVisiteur);
         include 'vues/v_suivrefrais.php';
         break;
 }

@@ -31,35 +31,7 @@
                     <input id="btn" type="submit" value="Valider" class="btn btn-success" 
                            role="button">
                 </div>
-            </form>
-            <form action="index.php?uc=suivreFrais&action=choisirVisiteur"
-                      method="post" role="form">
-                    <label for="lstMoisVisiteurs" accesskey="n">Mois : </label>
-                    <select id="lstMoisVisiteurs" name="lstMoisVisiteurs" class="form-control" style="width: 100px">
-                        <?php
-                        foreach ($lesMoisUtilisateurs as $unMois) {
-                            $mois = $unMois['mois'];
-                            $numAnnee = $unMois['numAnnee'];
-                            $numMois = $unMois['numMois'];
-                            if ($mois == $moisVisiteur) {
-                                ?>
-                                <option selected value="<?php echo $mois ?>">
-                                    <?php echo $numMois . '/' . $numAnnee ?> </option>
-                                <?php
-                            } else {
-                                ?>
-                                <option value="<?php echo $mois ?>">
-                                    <?php echo $numMois . '/' . $numAnnee ?> </option>
-                                <?php
-                            }
-                        }
-                        ?>  
-
-                    </select>
-                    <br>
-                    <input id="ok" type="submit" value="Valider" class="btn btn-success" 
-                           role="button">
-                </form>
+            
         </div>
     </div>
 </div>
