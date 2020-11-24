@@ -56,6 +56,9 @@
         ?>
     </table>
 </div>
-<button>
-    Mettre en paiement
-</button>
+<form method="post" 
+      action="index.php?uc=suivreFrais&action=miseEnPaiement" 
+      role="form" style="width:100px;">
+    
+    <button class="btn btn-success" type="submit">Mettre en paiement</button>
+    </form>

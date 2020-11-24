@@ -34,5 +34,10 @@ switch ($action) {
         include 'vues/v_choisirFicheFrais.php';
         break;
     case 'miseEnPaiement':
-        include 'vues/v_miseEnPaiement/php';
+        $idVisiteur =$_SESSION['idUser'];
+        $leMois =$_SESSION['mois'];
+        $MajEtat = $pdo->majEtatFicheFrais($idVisiteur,$leMois,'MP');
+        include 'vues/v_suivrefrais.php';
+        include 'vues/v_choisirFicheFrais.php';
+        include 'vues/v_miseEnPaiement.php';
 }

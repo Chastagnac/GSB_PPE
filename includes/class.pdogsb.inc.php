@@ -222,6 +222,15 @@ class PdoGsb {
         $requetePrepare->execute();
         return $requetePrepare->fetchAll();
     }
+    public function getEtatFrais($idVisiteur,$unMois){
+       $requetePrepare = PdoGsb::$monPdo->prepare(
+                'SELECT fichefrais.idetat as etat '
+                . 'FROM fichefrais '
+               . 'WHERE idvisiteur = :idVisiteur and mois = :unMois'
+        ); 
+       $requetePrepare->bindParam(':idVisiteur', $idVisiteur, PDO::PARAM_INT);
+        $requetePrepare->bindParam(':unMois', $unMois, PDO::PARAM_STR);
+    }
 
     /**
      * Met à jour la table ligneFraisForfait
