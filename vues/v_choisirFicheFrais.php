@@ -56,3 +56,6 @@
         ?>
     </table>
 </div>
+<button>
+    Mettre en paiement
+</button>

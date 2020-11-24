@@ -93,7 +93,7 @@
                                     </a>
                                 </li>
                                 <li <?php if ($uc == 'controlerFrais') { ?>class="SURVOL"<?php } ?>>
-                                    <a href="index.php?uc=controlerFrais&action=selectionnerVisiteurs" class="entete">
+                                    <a href="index.php?uc=controlerFrais&action=validerUtilisateur" class="entete">
                                         <span class="glyphicon glyphicon-ok"></span>
                                         Valider les fiches de frais
                                     </a>
