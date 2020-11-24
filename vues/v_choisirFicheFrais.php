@@ -1,4 +1,3 @@
-test
 
 <hr>
 <div class="panel panel-primary">

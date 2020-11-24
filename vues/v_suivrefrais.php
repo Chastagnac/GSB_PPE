@@ -32,7 +32,7 @@
                            role="button">
                 </div>
             </form>
-             <form action="index.php?uc=controlerFrais&action=choisirFicheFrais"
+             <form action="index.php?uc=suivreFrais&action=choisirFicheFrais"
                       method="post" role="form">
                     <label for="lstMoisVisiteurs" accesskey="n">
                         Choisir la fiche de frais validée  :

@@ -5,25 +5,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-$action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
-$id = $_SESSION['idComptable'];
+$action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING); 
 switch ($action) {
     case 'choisirVisiteur':
         $lesVisiteursVA = $pdo->getUtilisateursVA();
-        $lesVisiteurs = $pdo->getUtilisateursVA();
         $idVisiteur = filter_input(INPUT_POST, 'idVisiteurVA', FILTER_SANITIZE_STRING);
         $_SESSION['idUser'] = $idVisiteur;
-        $lesMoisUtilisateurs = $pdo->getLesMoisDisponibles($idVisiteur);
+        $lesMoisUtilisateurs = $pdo->getLesMoisDisponiblesVA($idVisiteur);
+        $lesCles = array_keys($lesMoisUtilisateurs);
+        $moisASelectionner = $lesCles[0];
         include 'vues/v_suivrefrais.php';
         break;
     case 'choisirFicheFrais':
-        $lesVisiteursVA = $pdo->getUtilisateursVA();
-        $lesVisiteurs = $pdo->getUtilisateursVA();
-        $idVisiteur = filter_input(INPUT_POST, 'idVisiteurVA', FILTER_SANITIZE_STRING);
-        $_SESSION['idUser'] = $idVisiteur;
-        $lesMoisUtilisateurs = $pdo->getLesMoisDisponibles($idVisiteur);
-        $leMois = filter_input(INPUT_POST, 'lstMois', FILTER_SANITIZE_STRING);
-        $lesMois = $pdo->getLesMoisDisponibles($idVisiteur);
+         $lesVisiteursVA = $pdo->getUtilisateursVA();
+        $idVisiteur =$_SESSION['idUser'] ;
+        $leMois = filter_input(INPUT_POST, 'lstMoisVisiteurs', FILTER_SANITIZE_STRING);
+        $lesMoisUtilisateurs = $pdo->getLesMoisDisponiblesVA($idVisiteur);
         $moisASelectionner = $leMois;
         $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois);
         $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $leMois);
