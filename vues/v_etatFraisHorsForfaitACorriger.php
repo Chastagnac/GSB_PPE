@@ -38,6 +38,7 @@
 </div>
 
 <div class="form-group">
+    Nombre total en euros : <?php echo  $prixTotal[0]?> € <br>
     Nombre de justificatifs : <?php echo $_SESSION['nbJustificatifV'] ?>
 </div>
 <form method="post" 
