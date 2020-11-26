@@ -19,8 +19,8 @@ switch ($action) {
          $lesVisiteursVA = $pdo->getUtilisateursVA();
         $idVisiteur =$_SESSION['idUser'];
         $leMois = filter_input(INPUT_POST, 'lstMoisVisiteurs', FILTER_SANITIZE_STRING);
+        $_SESSION['mois'] = $leMois;
         $lesMoisUtilisateurs = $pdo->getLesMoisDisponiblesVA($idVisiteur);
-        $moisASelectionner = $leMois;
         $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois);
         $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $leMois);
         $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur, $leMois);
@@ -34,10 +34,17 @@ switch ($action) {
         include 'vues/v_choisirFicheFrais.php';
         break;
     case 'miseEnPaiement':
-        $idVisiteur =$_SESSION['idUser'];
-        $leMois =$_SESSION['mois'];
-        $MajEtat = $pdo->majEtatFicheFrais($idVisiteur,$leMois,'MP');
-        include 'vues/v_suivrefrais.php';
-        include 'vues/v_choisirFicheFrais.php';
+        $lesMoisUtilisateurs = $pdo->getLesMoisDisponiblesVA($_SESSION['idUser']);
+        $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($_SESSION['idUser'], $_SESSION['mois']);
+        $lesFraisForfait = $pdo->getLesFraisForfait($_SESSION['idUser'], $_SESSION['mois']);
+        $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($_SESSION['idUser'], $_SESSION['mois']);
+        $numAnnee = substr($_SESSION['mois'], 0, 4);
+        $numMois = substr($_SESSION['mois'], 4, 2);
+        $libEtat = $lesInfosFicheFrais['libEtat'];
+        $montantValide = $lesInfosFicheFrais['montantValide'];
+        $nbJustificatifs = $lesInfosFicheFrais['nbJustificatifs'];
+        $dateModif = dateAnglaisVersFrancais($lesInfosFicheFrais['dateModif']);
+        $MajEtat = $pdo->majEtatFicheFrais($_SESSION['idUser'],$_SESSION['mois'],'MP');
+
         include 'vues/v_miseEnPaiement.php';
 }
