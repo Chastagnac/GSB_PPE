@@ -67,15 +67,14 @@ switch ($action) {
         include 'vues/v_etatFraisHorsForfaitACorriger.php';
         break;
     case 'ValiderFrais':
-
+        $pdo->majEtatFicheFrais($_SESSION['idUser'], $_SESSION['mois'], 'VA');
         $lesMoisVisiteurs = $pdo->getLesMoisDisponibles($_SESSION['idUser']);
         $lesFraisForfait = $pdo->getLesFraisForfait($_SESSION['idUser'], $_SESSION['mois']);
         $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($_SESSION['idUser'], $_SESSION['mois']);
         $prixTotal = $pdo->getPrixFicheFrais($_SESSION['idUser'], $_SESSION['mois']);
-        var_dump($prixTotal);
         include 'vues/v_listeVisiteurs.php';
         include 'vues/v_etatFraisACorriger.php';
         include 'vues/v_etatFraisHorsForfaitACorriger.php';
-        $pdo->majEtatFicheFrais($_SESSION['idUser'], $_SESSION['mois'], 'VA');
+
         break;
 }
