@@ -43,6 +43,9 @@ switch ($uc) {
     case 'controlerFrais':
         include 'controleurs/c_validerFrais.php';
         break;
+    case 'suivreFrais':
+        include 'controleurs/c_suivreFrais.php';
+        break;
     case 'deconnexion':
         include 'controleurs/c_deconnexion.php';
         break;    

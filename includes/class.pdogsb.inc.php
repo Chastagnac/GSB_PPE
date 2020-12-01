@@ -222,6 +222,15 @@ class PdoGsb {
         $requetePrepare->execute();
         return $requetePrepare->fetchAll();
     }
+    public function getEtatFrais($idVisiteur,$unMois){
+       $requetePrepare = PdoGsb::$monPdo->prepare(
+                'SELECT fichefrais.idetat as etat '
+                . 'FROM fichefrais '
+               . 'WHERE idvisiteur = :idVisiteur and mois = :unMois'
+        ); 
+       $requetePrepare->bindParam(':idVisiteur', $idVisiteur, PDO::PARAM_INT);
+        $requetePrepare->bindParam(':unMois', $unMois, PDO::PARAM_STR);
+    }
 
     /**
      * Met à jour la table ligneFraisForfait
@@ -485,6 +494,34 @@ class PdoGsb {
         }
         return $lesMois;
     }
+    /**
+     * Retourne la liste de mois pour lesquels unVIsiteur à une fiche
+     * de frais validé
+     * @param type $idVisiteur
+     * @return type
+     */
+    public function getLesMoisDisponiblesVA($idVisiteur) {
+        $requetePrepare = PdoGSB::$monPdo->prepare(
+                'SELECT fichefrais.mois AS mois FROM fichefrais '
+                . 'WHERE fichefrais.idvisiteur = :unIdVisiteur '
+                . 'and fichefrais.idetat = \'VA\''
+                . 'ORDER BY fichefrais.mois desc'
+        );
+        $requetePrepare->bindParam(':unIdVisiteur', $idVisiteur, PDO::PARAM_STR);
+        $requetePrepare->execute();
+        $lesMois = array();
+        while ($laLigne = $requetePrepare->fetch()) {
+            $mois = $laLigne['mois'];
+            $numAnnee = substr($mois, 0, 4);
+            $numMois = substr($mois, 4, 2);
+            $lesMois[] = array(
+                'mois' => $mois,
+                'numAnnee' => $numAnnee,
+                'numMois' => $numMois
+            );
+        }
+        return $lesMois;
+    }
 
     /**
      * 
@@ -500,6 +537,18 @@ class PdoGsb {
         $requetePrepare->execute();
         $laLigne = $requetePrepare->fetchAll();
         return $laLigne;
+    }
+    public function getUtilisateursVA(){
+        $requetePrepare = PdoGsb::$monPdo->prepare(
+                'SELECT DISTINCT visiteur.id as idVisiteurVA, visiteur.nom as nom, visiteur.prenom'
+                . ' as prenom from visiteur inner join fichefrais ON visiteur.id = fichefrais.idvisiteur'
+                . ' WHERE fichefrais.idetat = \'VA\' '
+                );
+        $requetePrepare->bindParam(':unId', $id, PDO::PARAM_INT);
+        $requetePrepare->execute();
+        $laLigne = $requetePrepare->fetchAll();
+        return $laLigne;
+              
     }
 
     /**
