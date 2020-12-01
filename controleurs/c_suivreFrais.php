@@ -45,6 +45,5 @@ switch ($action) {
         $nbJustificatifs = $lesInfosFicheFrais['nbJustificatifs'];
         $dateModif = dateAnglaisVersFrancais($lesInfosFicheFrais['dateModif']);
         $MajEtat = $pdo->majEtatFicheFrais($_SESSION['idUser'],$_SESSION['mois'],'MP');
-
         include 'vues/v_miseEnPaiement.php';
 }
