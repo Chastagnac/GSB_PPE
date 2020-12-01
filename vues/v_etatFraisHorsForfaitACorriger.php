@@ -1,8 +1,8 @@
 <hr>
 
-<div class="panel panel-info">
+<div class="panel panel-info comptable">
 
-    <div class="panel-heading">Descriptif des éléments hors forfait </div>
+    <div class="panel-heading comptable1">Descriptif des éléments hors forfait </div>
     <table class="table table-bordered table-responsive">
         <tr>
             <th class="date">Date</th>
@@ -38,6 +38,7 @@
 </div>
 
 <div class="form-group">
+    Nombre total en euros : <?php echo  $prixTotal[0]?> € <br>
     Nombre de justificatifs : <?php echo $_SESSION['nbJustificatifV'] ?>
 </div>
 <form method="post" 
