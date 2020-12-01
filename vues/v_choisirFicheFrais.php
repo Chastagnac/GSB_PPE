@@ -1,7 +1,7 @@
 
 <hr>
-<div class="panel panel-primary">
-    <div class="panel-heading">Fiche de frais du mois 
+<div class="panel panel-primary comptable">
+    <div class="panel-heading comptable1">Fiche de frais du mois 
         <?php echo $numMois . '-' . $numAnnee ?> : </div>
     <div class="panel-body">
         <strong><u>Etat :</u></strong> <?php echo $libEtat ?>
@@ -9,8 +9,8 @@
         <strong><u>Montant validé :</u></strong> <?php echo $montantValide ?>
     </div>
 </div>
-<div class="panel panel-info">
-    <div class ="panel-heading">Eléments forfaitisés</div>
+<div class="panel panel-info comptable">
+    <div class ="panel-heading comptable1">Eléments forfaitisés</div>
     <table class="table table-bordered table-responsive">
         <tr>
             <?php
@@ -32,8 +32,8 @@
         </tr>
     </table>
 </div>
-<div class="panel panel-info">
-    <div class="panel-heading">Descriptif des éléments hors forfait - 
+<div class="panel panel-info comptable">
+    <div class="panel-heading comptable1">Descriptif des éléments hors forfait - 
         <?php echo $nbJustificatifs ?> justificatifs reçus</div>
     <table class="table table-bordered table-responsive">
         <tr>
