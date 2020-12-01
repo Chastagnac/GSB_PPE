@@ -1,6 +1,8 @@
 <hr>
-<div class="panel panel-info">
-    <div class="panel-heading">Descriptif des éléments hors forfait </div>
+
+<div class="panel panel-info comptable">
+
+    <div class="panel-heading comptable1">Descriptif des éléments hors forfait </div>
     <table class="table table-bordered table-responsive">
         <tr>
             <th class="date">Date</th>
@@ -10,22 +12,40 @@
         </tr>
         <?php
         foreach ($lesFraisHorsForfait as $unFraisHorsForfait) {
-            $date = $unFraisHorsForfait['date'];
             $libelle = htmlspecialchars($unFraisHorsForfait['libelle']);
+            $date = $unFraisHorsForfait['date'];
             $montant = $unFraisHorsForfait['montant'];
+            $id = $unFraisHorsForfait['id'];
+            $total = 0
             ?>
-            <tr>
-                <td><?php echo $date ?></td>
-                <td><?php echo $libelle ?></td>
-                <td><?php echo $montant ?></td>
-                <td>  <button class="btn btn-success" type="submit">Corriger</button>
-                    <button class="btn btn-danger" type="reset">Reset</button></td>
-            </tr>
+            <form method="post" 
+                  action="index.php?uc=controlerFrais&action=MajFraisHorsForfait&idFraisHF=<?php echo $id ?>">
+                <tr>
+                    <td><input type="text" value="<?php echo $date ?>" name="date" size="10"></td>
+                    <td><input type="text" value="<?php echo $libelle ?>"name="libelle" size="50"></td>
+                    <td><input type="text" value="<?php echo $montant ?>" name="montant" size="10"></td>
+                    <td>
+                        <button class="btn btn-success"
+                                type="submit" onclick="return confirm('Voulez-vous vraiment mettre à jours ce frais hors forfait ?');">Corriger</button>
+                        <button class="btn btn-danger" type="reset">Reset</button></td>
+                </tr>
+            </form>
             <?php
         }
         ?>
+
     </table>  
 </div>
+
 <div class="form-group">
-    Nombre de justificatifs : <?php echo count($lesFraisHorsForfait)?>
+    Nombre total en euros : <?php echo  $prixTotal[0]?> € <br>
+    Nombre de justificatifs : <?php echo $_SESSION['nbJustificatifV'] ?>
 </div>
+<form method="post" 
+      action="index.php?uc=controlerFrais&action=ValiderFrais" 
+      role="form" style="width:200px;">
+    
+    <button class="btn btn-success" type="submit">Valider la fiche de frais</button>
+</form>
+
+

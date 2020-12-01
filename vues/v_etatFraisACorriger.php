@@ -4,7 +4,7 @@
     <h3>Eléments forfaitisés</h3>
     <div class="col-md-4">
         <form method="post" 
-              action="index.php?uc=validerFrais=corrigerFrais" 
+              action="index.php?uc=controlerFrais&action=MajFraisForfait" 
               role="form" style="width:200px;">
             <fieldset>       
                 <?php
@@ -26,11 +26,9 @@
                 ?>
                 <button class="btn btn-success" type="submit">Corriger</button>
                 <button class="btn btn-danger" type="reset">Reset</button>
-
-
-
             </fieldset>
         </form>
     </div>
 </div>
+
 
