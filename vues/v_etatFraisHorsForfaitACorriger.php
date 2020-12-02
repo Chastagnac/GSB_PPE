@@ -45,7 +45,7 @@
       action="index.php?uc=controlerFrais&action=ValiderFrais" 
       role="form" style="width:200px;">
     
-    <button class="btn btn-success" type="submit">Valider la fiche de frais</button>
+    <button class="btn btn-success" type="submit" onclick="return confirm('Voulez-vous vraiment valider la fiche de frais ?');">Valider la fiche de frais</button>
 </form>
 
 

@@ -222,13 +222,14 @@ class PdoGsb {
         $requetePrepare->execute();
         return $requetePrepare->fetchAll();
     }
-    public function getEtatFrais($idVisiteur,$unMois){
-       $requetePrepare = PdoGsb::$monPdo->prepare(
+
+    public function getEtatFrais($idVisiteur, $unMois) {
+        $requetePrepare = PdoGsb::$monPdo->prepare(
                 'SELECT fichefrais.idetat as etat '
                 . 'FROM fichefrais '
-               . 'WHERE idvisiteur = :idVisiteur and mois = :unMois'
-        ); 
-       $requetePrepare->bindParam(':idVisiteur', $idVisiteur, PDO::PARAM_INT);
+                . 'WHERE idvisiteur = :idVisiteur and mois = :unMois'
+        );
+        $requetePrepare->bindParam(':idVisiteur', $idVisiteur, PDO::PARAM_INT);
         $requetePrepare->bindParam(':unMois', $unMois, PDO::PARAM_STR);
     }
 
@@ -471,9 +472,10 @@ class PdoGsb {
                 'numMois' => $numMois
             );
         }
-        return $lesMois;    
+        return $lesMois;
     }
-      public function getLesMoisDisponiblesAll($idVisiteur) {
+
+    public function getLesMoisDisponiblesAll($idVisiteur) {
         $requetePrepare = PdoGSB::$monPdo->prepare(
                 'SELECT fichefrais.mois AS mois FROM fichefrais '
                 . 'WHERE fichefrais.idvisiteur = :unIdVisiteur '
@@ -494,6 +496,7 @@ class PdoGsb {
         }
         return $lesMois;
     }
+
     /**
      * Retourne la liste de mois pour lesquels unVIsiteur à une fiche
      * de frais validé
@@ -538,17 +541,17 @@ class PdoGsb {
         $laLigne = $requetePrepare->fetchAll();
         return $laLigne;
     }
-    public function getUtilisateursVA(){
+
+    public function getUtilisateursVA() {
         $requetePrepare = PdoGsb::$monPdo->prepare(
                 'SELECT DISTINCT visiteur.id as idVisiteurVA, visiteur.nom as nom, visiteur.prenom'
                 . ' as prenom from visiteur inner join fichefrais ON visiteur.id = fichefrais.idvisiteur'
                 . ' WHERE fichefrais.idetat = \'VA\' '
-                );
+        );
         $requetePrepare->bindParam(':unId', $id, PDO::PARAM_INT);
         $requetePrepare->execute();
         $laLigne = $requetePrepare->fetchAll();
         return $laLigne;
-              
     }
 
     /**
@@ -567,13 +570,13 @@ class PdoGsb {
         return $laLigne;
     }
 
-    public function getPrixFicheFrais($idVisiteur, $mois) {
+    public function getPrixFicheFrais($idVisiteur, $mois, $prixKLM) {
         $requetePrepare = PdoGSB::$monPdo->prepare(
                 ' SELECT SUM(prix) from ( SELECT quantite*110 as prix '
                 . 'FROM lignefraisforfait WHERE idvisiteur = :unIdVisiteur '
                 . 'AND mois = :unMois AND idfraisforfait = \'ETP\' '
                 . 'UNION '
-                . 'SELECT quantite*0.62 as prix FROM lignefraisforfait '
+                . 'SELECT quantite* :unPirxKLM as prix FROM lignefraisforfait '
                 . 'WHERE idvisiteur = :unIdVisiteur AND mois = :unMois '
                 . 'AND idfraisforfait = \'KM\' '
                 . 'UNION '
@@ -588,10 +591,36 @@ class PdoGsb {
                 . 'SELECT montant from lignefraishorsforfait '
                 . 'WHERE idvisiteur= :unIdVisiteur and mois = :unMois) as maTable '
         );
+        $requetePrepare->bindParam(':unPirxKLM', $prixKLM, PDO::PARAM_STR);
         $requetePrepare->bindParam(':unIdVisiteur', $idVisiteur, PDO::PARAM_STR);
         $requetePrepare->bindParam(':unMois', $mois, PDO::PARAM_STR);
         $requetePrepare->execute();
         $laLigne = $requetePrepare->fetch();
+        return $laLigne;
+    }
+
+    public function getPrixKLM($id) {
+        $requetePrepare = PdoGSB::$monPdo->prepare(
+                'SELECT visiteur.vehicule from VISITEUR '
+                . 'WHERE id = :IdVisiteur'
+        );
+        $requetePrepare->bindParam(':IdVisiteur', $id, PDO::PARAM_STR);
+        $requetePrepare->execute();
+        $laLigne = $requetePrepare->fetch();
+        switch ($laLigne[0]) {
+            case '4CV Diesel':
+                return 0.52;
+                break;
+            case '5/6CV Diesel':
+                return 0.58;
+                 break;
+            case '4CV Essence':
+                return 0.62;
+                 break;
+            case '5/6CV Essence':
+                return 0.67;
+                 break;
+        }
         return $laLigne;
     }
 
@@ -642,6 +671,19 @@ class PdoGsb {
                 . 'AND fichefrais.mois = :unMois'
         );
         $requetePrepare->bindParam(':unEtat', $etat, PDO::PARAM_STR);
+        $requetePrepare->bindParam(':unIdVisiteur', $idVisiteur, PDO::PARAM_STR);
+        $requetePrepare->bindParam(':unMois', $mois, PDO::PARAM_STR);
+        $requetePrepare->execute();
+    }
+
+    public function majPrixFicheFrais($idVisiteur, $mois, $prixTotal) {
+        $requetePrepare = PdoGSB::$monPdo->prepare(
+                'UPDATE ficheFrais '
+                . 'SET montantvalide = :unMontant '
+                . 'WHERE fichefrais.idvisiteur = :unIdVisiteur '
+                . 'AND fichefrais.mois = :unMois'
+        );
+        $requetePrepare->bindParam(':unMontant', $prixTotal, PDO::PARAM_STR);
         $requetePrepare->bindParam(':unIdVisiteur', $idVisiteur, PDO::PARAM_STR);
         $requetePrepare->bindParam(':unMois', $mois, PDO::PARAM_STR);
         $requetePrepare->execute();

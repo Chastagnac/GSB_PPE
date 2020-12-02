@@ -12,15 +12,22 @@ switch ($action) {
         break;
 
     case 'corrigerFrais':
+        
         $moisVisiteur = filter_input(INPUT_POST, 'lstMoisVisiteurs', FILTER_SANITIZE_STRING);
         $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($_SESSION['idUser'], $moisVisiteur);
         $nbJustificatifs = $lesInfosFicheFrais['nbJustificatifs'];
-        $_SESSION['nbJustificatifV'] = $nbJustificatifs;
+        $prixKLM = $pdo->getPrixKLM($_SESSION['idUser']);
+        
         $_SESSION['mois'] = $moisVisiteur;
-        $prixTotal = $pdo->getPrixFicheFrais($_SESSION['idUser'], $moisVisiteur);
+        $_SESSION['nbJustificatifV'] = $nbJustificatifs;
+        $_SESSION['prixKLM'] = $prixKLM;
+
+        $prixTotal = $pdo->getPrixFicheFrais($_SESSION['idUser'], $moisVisiteur, $_SESSION['prixKLM']);
         $lesMoisVisiteurs = $pdo->getLesMoisDisponibles($_SESSION['idUser']);
         $lesFraisForfait = $pdo->getLesFraisForfait($_SESSION['idUser'], $moisVisiteur);
         $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($_SESSION['idUser'], $moisVisiteur);
+
+        var_dump($prixKLM);
 
         if (count($lesFraisForfait) == 0) {
             include 'vues/v_listeVisiteurs.php';
@@ -41,7 +48,7 @@ switch ($action) {
             ajouterErreur('Les valeurs des frais doivent être numériques');
             include 'vues/v_erreurs.php';
         }
-        $prixTotal = $pdo->getPrixFicheFrais($_SESSION['idUser'], $_SESSION['mois']);
+        $prixTotal = $pdo->getPrixFicheFrais($_SESSION['idUser'], $_SESSION['mois'], $_SESSION['prixKLM']);
         $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($_SESSION['idUser'], $_SESSION['mois']);
         $lesFraisForfait = $pdo->getLesFraisForfait($_SESSION['idUser'], $_SESSION['mois']);
 
@@ -57,7 +64,7 @@ switch ($action) {
         $montantHF = filter_input(INPUT_POST, 'montant', FILTER_SANITIZE_STRING);
         $libelleHF = filter_input(INPUT_POST, 'libelle', FILTER_SANITIZE_STRING);
         $pdo->majFraisHorsForfait($idFraisHF, $libelleHF, $date, $montantHF);
-        $prixTotal = $pdo->getPrixFicheFrais($_SESSION['idUser'], $_SESSION['mois']);
+        $prixTotal = $pdo->getPrixFicheFrais($_SESSION['idUser'], $_SESSION['mois'], $_SESSION['prixKLM']);
         $lesMoisVisiteurs = $pdo->getLesMoisDisponibles($_SESSION['idUser']);
         $lesFraisForfait = $pdo->getLesFraisForfait($_SESSION['idUser'], $_SESSION['mois']);
         $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($_SESSION['idUser'], $_SESSION['mois']);
@@ -71,7 +78,12 @@ switch ($action) {
         $lesMoisVisiteurs = $pdo->getLesMoisDisponibles($_SESSION['idUser']);
         $lesFraisForfait = $pdo->getLesFraisForfait($_SESSION['idUser'], $_SESSION['mois']);
         $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($_SESSION['idUser'], $_SESSION['mois']);
-        $prixTotal = $pdo->getPrixFicheFrais($_SESSION['idUser'], $_SESSION['mois']);
+
+
+        $prixTotal = $pdo->getPrixFicheFrais($_SESSION['idUser'], $_SESSION['mois'], $_SESSION['prixKLM']);
+
+        $pdo->majPrixFicheFrais($_SESSION['idUser'], $_SESSION['mois'], $prixTotal[0]);
+
         include 'vues/v_listeVisiteurs.php';
         include 'vues/v_etatFraisACorriger.php';
         include 'vues/v_etatFraisHorsForfaitACorriger.php';
