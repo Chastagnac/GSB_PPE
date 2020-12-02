@@ -27,7 +27,6 @@ switch ($action) {
         $lesFraisForfait = $pdo->getLesFraisForfait($_SESSION['idUser'], $moisVisiteur);
         $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($_SESSION['idUser'], $moisVisiteur);
 
-        var_dump($prixKLM);
 
         if (count($lesFraisForfait) == 0) {
             include 'vues/v_listeVisiteurs.php';
