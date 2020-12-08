@@ -27,7 +27,8 @@
                     <td>
                         <button class="btn btn-success"
                                 type="submit" onclick="return confirm('Voulez-vous vraiment mettre à jours ce frais hors forfait ?');">Corriger</button>
-                        <button class="btn btn-danger" type="reset">Reset</button></td>
+                        <td><a href="index.php?uc=validerFrais&action=supprimerFrais&idFrais=<?php echo $id ?>" 
+                           onclick="return confirm('Voulez-vous vraiment supprimer ce frais?');">Supprimer ce frais</a></td>
                 </tr>
             </form>
             <?php
