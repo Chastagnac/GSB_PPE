@@ -1,5 +1,18 @@
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<div class="alert alert-success">
-    <strong>Success!</strong> You shouzdzdld <a href="#" class="alert-link">read this message</a>.
+<?php
+$action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
+switch ($action) {
+    case 'miseEnPaiement':
+        $word = 'mise en paiement.';
+        break;
+    case 'ValiderFrais':
+        $word = 'validée.';
+        break;
+}
+?>
+
+<div class="alert alert-success" role="alert">
+    <?php
+    $infoVi = $pdo->getNomPrenomVisiteur($_SESSION['idUser']);
+    echo 'La fiche de frais du visiteur ' . $infoVi['prenom'] . ' ' . $infoVi['nom'] . ' à bien était '. $word;
+    ?>
 </div>

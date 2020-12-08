@@ -38,13 +38,15 @@ switch ($action) {
         $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($_SESSION['idUser'], $_SESSION['mois']);
         $lesFraisForfait = $pdo->getLesFraisForfait($_SESSION['idUser'], $_SESSION['mois']);
         $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($_SESSION['idUser'], $_SESSION['mois']);
+        $lesVisiteursVA = $pdo->getUtilisateursVA();
         $numAnnee = substr($_SESSION['mois'], 0, 4);
-
+        
         $libEtat = $lesInfosFicheFrais['libEtat'];
         $montantValide = $lesInfosFicheFrais['montantValide'];
         $nbJustificatifs = $lesInfosFicheFrais['nbJustificatifs'];
         $dateModif = dateAnglaisVersFrancais($lesInfosFicheFrais['dateModif']);
         $MajEtat = $pdo->majEtatFicheFrais($_SESSION['idUser'],$_SESSION['mois'],'MP');
-        include 'vues/v_miseEnPaiement.php';
+        include 'vues/v_successful.php';
+        include 'vues/v_suivrefrais.php';
         
 }

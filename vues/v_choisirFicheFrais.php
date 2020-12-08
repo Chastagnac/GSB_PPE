@@ -1,6 +1,7 @@
 
 <hr>
-<div class="panel panel-primary comptable">
+<div class="panel panel-primary comptable" style="width: 50%; text-align: center; 
+     margin : auto; margin-bottom: 20px;">
     <div class="panel-heading comptable1">Fiche de frais du mois 
         <?php echo $numMois . '-' . $numAnnee ?> : </div>
     <div class="panel-body">
@@ -58,7 +59,7 @@
 </div>
 <form method="post" 
       action="index.php?uc=suivreFrais&action=miseEnPaiement" 
-      role="form" style="width:100px;">
+      role="form" style="text-align: center; margin : auto; margin-bottom: 25px;size: 100px;">
     
-    <button class="btn btn-success" type="submit">Mettre en paiement</button>
+    <button class="btn btn-success" type="submit" >Mettre en paiement</button>
     </form>

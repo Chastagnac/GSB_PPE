@@ -100,6 +100,17 @@ class PdoGsb {
         return $requetePrepare->fetch();
     }
 
+    public function getNomPrenomVisiteur($id) {
+        $requetePrepare = PdoGsb::$monPdo->prepare(
+                'SELECT visiteur.prenom, visiteur.nom '
+                . 'FROM visiteur '
+                . 'WHERE visiteur.id = :unId '
+        );
+             $requetePrepare->bindParam(':unId', $id, PDO::PARAM_STR);
+        $requetePrepare->execute();
+        return $requetePrepare->fetch();
+    }
+
     /**
      * Retourne les informations d'un comptable
      *
@@ -445,7 +456,8 @@ class PdoGsb {
     }
 
     /**
-     * Retourne les mois pour lesquel un visiteur a une fiche de frais
+     * Retourne les mois pour lesquel un visiteur a une fiche de frais et 
+     * dont l'état est cloturé 
      *
      * @param String $idVisiteur ID du visiteur
      *
@@ -475,6 +487,14 @@ class PdoGsb {
         return $lesMois;
     }
 
+    /**
+     * Retourne les mois pour lesquel un visiteur a une fiche de frais
+     *
+     * @param String $idVisiteur ID du visiteur
+     *
+     * @return un tableau associatif de clé un mois -aaaamm- et de valeurs
+     *         l'année et le mois correspondant
+     */
     public function getLesMoisDisponiblesAll($idVisiteur) {
         $requetePrepare = PdoGSB::$monPdo->prepare(
                 'SELECT fichefrais.mois AS mois FROM fichefrais '
@@ -542,6 +562,10 @@ class PdoGsb {
         return $laLigne;
     }
 
+    /**
+     * 
+     * @return un tableau avec tous les utilisateur en attente de valider frais
+     */
     public function getUtilisateursVA() {
         $requetePrepare = PdoGsb::$monPdo->prepare(
                 'SELECT DISTINCT visiteur.id as idVisiteurVA, visiteur.nom as nom, visiteur.prenom'
@@ -555,7 +579,7 @@ class PdoGsb {
     }
 
     /**
-     * 
+     * Recupère le nom par l'id
      * @param type $id
      * @return retourne le nom par l'id
      */
@@ -570,6 +594,13 @@ class PdoGsb {
         return $laLigne;
     }
 
+    /**
+     * Retourne le prix total de la fiche de frais d'un utilisateur
+     * @param type $idVisiteur
+     * @param type $mois
+     * @param type $prixKLM
+     * @return le prix total
+     */
     public function getPrixFicheFrais($idVisiteur, $mois, $prixKLM) {
         $requetePrepare = PdoGSB::$monPdo->prepare(
                 ' SELECT SUM(prix) from ( SELECT quantite*110 as prix '
@@ -599,6 +630,11 @@ class PdoGsb {
         return $laLigne;
     }
 
+    /**
+     * Permet de récupèrer le prix du KLM en fonction du véhicule du visiteur
+     * @param type $id
+     * @return le prix klm en fonction du vehicule
+     */
     public function getPrixKLM($id) {
         $requetePrepare = PdoGSB::$monPdo->prepare(
                 'SELECT visiteur.vehicule from VISITEUR '
@@ -613,13 +649,13 @@ class PdoGsb {
                 break;
             case '5/6CV Diesel':
                 return 0.58;
-                 break;
+                break;
             case '4CV Essence':
                 return 0.62;
-                 break;
+                break;
             case '5/6CV Essence':
                 return 0.67;
-                 break;
+                break;
         }
         return $laLigne;
     }
@@ -676,6 +712,13 @@ class PdoGsb {
         $requetePrepare->execute();
     }
 
+    /**
+     * Met à jour la colonne montantvalide de la table fichefrais 
+     * en fonction du visiteur
+     * @param type $idVisiteur
+     * @param type $mois
+     * @param type $prixTotalm
+     */
     public function majPrixFicheFrais($idVisiteur, $mois, $prixTotal) {
         $requetePrepare = PdoGSB::$monPdo->prepare(
                 'UPDATE ficheFrais '
