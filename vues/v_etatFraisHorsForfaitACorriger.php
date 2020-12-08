@@ -38,13 +38,13 @@
 </div>
 
 <div class="form-group">
-    Nombre total en euros : <?php echo  $prixTotal[0]?> € <br>
+    Nombre total en euros : <?php echo $prixTotal[0] ?> € <br>
     Nombre de justificatifs : <?php echo $_SESSION['nbJustificatifV'] ?>
 </div>
 <form method="post" 
       action="index.php?uc=controlerFrais&action=ValiderFrais" 
       role="form" style="width:200px;">
-    
+
     <button class="btn btn-success" type="submit" onclick="return confirm('Voulez-vous vraiment valider la fiche de frais ?');">Valider la fiche de frais</button>
 </form>
 

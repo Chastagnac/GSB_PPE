@@ -12,12 +12,12 @@ switch ($action) {
         break;
 
     case 'corrigerFrais':
-        
+
         $moisVisiteur = filter_input(INPUT_POST, 'lstMoisVisiteurs', FILTER_SANITIZE_STRING);
         $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($_SESSION['idUser'], $moisVisiteur);
         $nbJustificatifs = $lesInfosFicheFrais['nbJustificatifs'];
         $prixKLM = $pdo->getPrixKLM($_SESSION['idUser']);
-        
+
         $_SESSION['mois'] = $moisVisiteur;
         $_SESSION['nbJustificatifV'] = $nbJustificatifs;
         $_SESSION['prixKLM'] = $prixKLM;
@@ -77,15 +77,10 @@ switch ($action) {
         $lesMoisVisiteurs = $pdo->getLesMoisDisponibles($_SESSION['idUser']);
         $lesFraisForfait = $pdo->getLesFraisForfait($_SESSION['idUser'], $_SESSION['mois']);
         $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($_SESSION['idUser'], $_SESSION['mois']);
-
-
         $prixTotal = $pdo->getPrixFicheFrais($_SESSION['idUser'], $_SESSION['mois'], $_SESSION['prixKLM']);
-
         $pdo->majPrixFicheFrais($_SESSION['idUser'], $_SESSION['mois'], $prixTotal[0]);
-
+        $lesVisiteurs = $pdo->getUtilisateursDisponibles();
+        include 'vues/v_successful.php';
         include 'vues/v_listeVisiteurs.php';
-        include 'vues/v_etatFraisACorriger.php';
-        include 'vues/v_etatFraisHorsForfaitACorriger.php';
-
         break;
 }
