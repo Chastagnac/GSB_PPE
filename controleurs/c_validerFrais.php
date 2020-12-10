@@ -5,35 +5,35 @@ $lesVisiteurs = $pdo->getUtilisateursDisponibles();
 switch ($action) {
 
     case 'validerUtilisateur':
+        $idVisiteur = filter_input(INPUT_POST, 'idVisiteur', FILTER_SANITIZE_STRING);
+        $_SESSION['idUser'] = $idVisiteur;
         if (count($lesVisiteurs) == 0) {
             include 'vues/v_listeVisiteurs.php';
             include 'vues/v_aucuneFiche.php';
-        } else {
-            $idVisiteur = filter_input(INPUT_POST, 'idVisiteur', FILTER_SANITIZE_STRING);
-            $_SESSION['idUser'] = $idVisiteur;
+        } else { 
             $lesMoisVisiteurs = $pdo->getLesMoisDisponibles($idVisiteur);
             include 'vues/v_listeVisiteurs.php';
         }
-
         break;
 
     case 'corrigerFrais':
         $moisVisiteur = filter_input(INPUT_POST, 'lstMoisVisiteurs', FILTER_SANITIZE_STRING);
-        $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($_SESSION['idUser'], $moisVisiteur);
-        $prixTotal = $pdo->getPrixFicheFrais($_SESSION['idUser'], $moisVisiteur, $_SESSION['prixKLM']);
-        $lesMoisVisiteurs = $pdo->getLesMoisDisponibles($_SESSION['idUser']);
         $lesFraisForfait = $pdo->getLesFraisForfait($_SESSION['idUser'], $moisVisiteur);
-        $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($_SESSION['idUser'], $moisVisiteur);
-
-        $_SESSION['mois'] = $moisVisiteur;
-
 
         if (count($lesFraisForfait) == 0) {
             include 'vues/v_listeVisiteurs.php';
             include 'vues/v_aucuneFiche.php';
         } else {
+
+            $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($_SESSION['idUser'], $moisVisiteur);
+            $prixTotal = $pdo->getPrixFicheFrais($_SESSION['idUser'], $moisVisiteur, $_SESSION['prixKLM']);
+            $lesMoisVisiteurs = $pdo->getLesMoisDisponibles($_SESSION['idUser']);
+
+            $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($_SESSION['idUser'], $moisVisiteur);
             $nbJustificatifs = $lesInfosFicheFrais['nbJustificatifs'];
             $prixKLM = $pdo->getPrixKLM($_SESSION['idUser']);
+
+            $_SESSION['mois'] = $moisVisiteur;
             $_SESSION['nbJustificatifV'] = $nbJustificatifs;
             $_SESSION['prixKLM'] = $prixKLM;
             include 'vues/v_listeVisiteurs.php';
