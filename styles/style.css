@@ -8,14 +8,20 @@
 }
 .entete{
     color : orange;
+}      
+
+.texteorange{
+    color : orange !important;
+    background-color: #fff !important;
 }
-.SURVOL:active{
-       background-color: orange !important;
-    color : white;
+.activeorange:hover{
+    background-color: #ffa5003f !important;
+    
+    
 }
-.entete:hover{
+.nav-pills > li.active > .activeorange{
     background-color: orange !important;
-    color : white;
+    color : white !important;
 }
 
 .comptable1{
