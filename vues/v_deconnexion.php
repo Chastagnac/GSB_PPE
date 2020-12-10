@@ -16,7 +16,7 @@
 if (comptableEstConnecte()) {
     deconnecter();
     ?>
-    <div class = "alert alert-info comptable1 " role = "alert">
+    <div class = "alert alert-info comptabledeco " role = "alert">
     <p>Vous avez bien été déconnecté! <a href = "index.php">Cliquez ici</a>
     pour revenir à la page de connexion.</p>
     </div><?php

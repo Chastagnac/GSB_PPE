@@ -29,6 +29,11 @@
     border-color:  orange !important;
     background-color:  orange !important;
 }
+.comptabledeco{
+    color : white !important;
+    border-color:  #ffbd5e !important;
+    background-color:  #ffbd5e !important;
+}
 
 .btn-xs{
     background-color: black !important;
