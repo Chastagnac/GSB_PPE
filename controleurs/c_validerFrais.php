@@ -26,7 +26,8 @@ switch ($action) {
         } else {
 
             $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($_SESSION['idUser'], $moisVisiteur);
-            $prixTotal = $pdo->getPrixFicheFrais($_SESSION['idUser'], $moisVisiteur, $_SESSION['prixKLM']);
+            $prixKLM = $pdo->getPrixKLM($_SESSION['idUser']);
+            $prixTotal = $pdo->getPrixFicheFrais($_SESSION['idUser'], $moisVisiteur, $prixKLM);
             $lesMoisVisiteurs = $pdo->getLesMoisDisponibles($_SESSION['idUser']);
 
             $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($_SESSION['idUser'], $moisVisiteur);
