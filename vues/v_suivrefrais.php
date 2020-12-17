@@ -32,36 +32,36 @@
                            role="button">
                 </div>
             </form>
-             <form action="index.php?uc=suivreFrais&action=choisirFicheFrais"
-                      method="post" role="form">
-                    <label for="lstMoisVisiteurs" accesskey="n">
-                        Choisir la fiche de frais validée  :
-                    </label>
-                    <select id="lstMoisVisiteurs" name="lstMoisVisiteurs" class="form-control" style="width: 100px">
-                        <?php
-                        foreach ($lesMoisUtilisateurs as $unMois) {
-                            $mois = $unMois['mois'];
-                            $numAnnee = $unMois['numAnnee'];
-                            $numMois = $unMois['numMois'];
-                            if ($mois == $moisVisiteur) {
-                                ?>
-                                <option selected value="<?php echo $mois ?>">
-                                    <?php echo $numMois . '/' . $numAnnee ?> </option>
-                                <?php
-                            } else {
-                                ?>
-                                <option value="<?php echo $mois ?>">
-                                    <?php echo $numMois . '/' . $numAnnee ?> </option>
-                                <?php
-                            }
+            <form action="index.php?uc=suivreFrais&action=choisirFicheFrais"
+                  method="post" role="form">
+                <label for="lstMoisVisiteurs" accesskey="n">
+                    Choisir la fiche de frais validée  :
+                </label>
+                <select id="lstMoisVisiteurs" name="lstMoisVisiteurs" class="form-control" style="width: 100px">
+                    <?php
+                    foreach ($lesMoisUtilisateurs as $unMois) {
+                        $mois = $unMois['mois'];
+                        $numAnnee = $unMois['numAnnee'];
+                        $numMois = $unMois['numMois'];
+                        if ($mois == $moisVisiteur) {
+                            ?>
+                            <option selected value="<?php echo $mois ?>">
+                                <?php echo $numMois . '/' . $numAnnee ?> </option>
+                            <?php
+                        } else {
+                            ?>
+                            <option value="<?php echo $mois ?>">
+                                <?php echo $numMois . '/' . $numAnnee ?> </option>
+                            <?php
                         }
-                        ?>  
+                    }
+                    ?>  
 
-                    </select>
-                    <br>
-                    <input id="ok" type="submit" value="Afficher Détails" class="btn btn-success" 
-                           role="button">
-                </form>
+                </select>
+                <br>
+                <input id="ok" type="submit" value="Afficher Détails" class="btn btn-success" 
+                       role="button">
+            </form>
         </div>
     </div>
 </div>

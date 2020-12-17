@@ -71,3 +71,7 @@
         ?>
     </table>
 </div>
+<?php
+if ($libEtat == 'Validée et mise en paiement') {
+    ?><a href="./includes/ficheFraisPdf.php" target="_blank">Télécharger le pdf de la fiche de frais</a>
+<?php } ?>

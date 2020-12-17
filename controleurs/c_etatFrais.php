@@ -46,4 +46,3 @@ switch ($action) {
         include 'vues/v_etatFrais.php';
         break;
 }
-
