@@ -21,7 +21,13 @@
     <div class="panel-body">
         <strong><u>Etat :</u></strong> <?php echo $libEtat ?>
         depuis le <?php echo $dateModif ?> <br> 
+     
         <strong><u>Montant validé :</u></strong> <?php echo $montantValide ?>
+           <?php if ($libEtat == 'Validée et mise en paiement') {
+            ?><a href="./includes/ficheFraisPdf.php">
+                <img src="./images/pdf" alt="pdf" style="width: 35px;
+                     height: 50px; display : block; margin : 10px;"/></a>
+                 <?php } ?>
     </div>
 </div>
 <div class="panel panel-info">
@@ -30,7 +36,8 @@
         <tr>
             <?php
             foreach ($lesFraisForfait as $unFraisForfait) {
-                $libelle = $unFraisForfait['libelle']; ?>
+                $libelle = $unFraisForfait['libelle'];
+                ?>
                 <th> <?php echo htmlspecialchars($libelle) ?></th>
                 <?php
             }
@@ -39,7 +46,8 @@
         <tr>
             <?php
             foreach ($lesFraisForfait as $unFraisForfait) {
-                $quantite = $unFraisForfait['quantite']; ?>
+                $quantite = $unFraisForfait['quantite'];
+                ?>
                 <td class="qteForfait"><?php echo $quantite ?> </td>
                 <?php
             }
@@ -60,7 +68,8 @@
         foreach ($lesFraisHorsForfait as $unFraisHorsForfait) {
             $date = $unFraisHorsForfait['date'];
             $libelle = htmlspecialchars($unFraisHorsForfait['libelle']);
-            $montant = $unFraisHorsForfait['montant']; ?>
+            $montant = $unFraisHorsForfait['montant'];
+            ?>
             <tr>
                 <td><?php echo $date ?></td>
                 <td><?php echo $libelle ?></td>
@@ -71,7 +80,3 @@
         ?>
     </table>
 </div>
-<?php
-if ($libEtat == 'Validée et mise en paiement') {
-    ?><a href="./includes/ficheFraisPdf.php" target="_blank">Télécharger le pdf de la fiche de frais</a>
-<?php } ?>
