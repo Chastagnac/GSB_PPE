@@ -24,13 +24,10 @@ switch ($action) {
             include 'vues/v_listeVisiteurs.php';
             include 'vues/v_aucuneFiche.php';
         } else {
-
             $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($_SESSION['idUser'], $moisVisiteur);
             $prixKLM = $pdo->getPrixKLM($_SESSION['idUser'],$moisVisiteur);
-            var_dump($prixKLM);
             $prixTotal = $pdo->getPrixFicheFrais($_SESSION['idUser'], $moisVisiteur, $prixKLM);
             $lesMoisVisiteurs = $pdo->getLesMoisDisponibles($_SESSION['idUser']);
-
             $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($_SESSION['idUser'], $moisVisiteur);
             $nbJustificatifs = $lesInfosFicheFrais['nbJustificatifs'];
 
@@ -57,7 +54,6 @@ switch ($action) {
     case 'MajFraisForfait':
         $lesFrais = filter_input(INPUT_POST, 'lesFrais', FILTER_DEFAULT, FILTER_FORCE_ARRAY);
         $vehiculeVisiteur = $pdo->getVehiculeVisiteur($_SESSION['idUser'], $_SESSION['mois']);
-        var_dump($vehiculeVisiteur);
         $lesMoisVisiteurs = $pdo->getLesMoisDisponibles($_SESSION['idUser']);
         if (lesQteFraisValides($lesFrais)) {
             $pdo->majFraisForfait($_SESSION['idUser'], $_SESSION['mois'], $lesFrais, $vehiculeVisiteur['vehicule']);
@@ -68,12 +64,11 @@ switch ($action) {
         $prixTotal = $pdo->getPrixFicheFrais($_SESSION['idUser'], $_SESSION['mois'], $_SESSION['prixKLM']);
         $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($_SESSION['idUser'], $_SESSION['mois']);
         $lesFraisForfait = $pdo->getLesFraisForfait($_SESSION['idUser'], $_SESSION['mois']);
-
-
         include 'vues/v_listeVisiteurs.php';
         include 'vues/v_etatFraisACorriger.php';
         include 'vues/v_etatFraisHorsForfaitACorriger.php';
         break;
+        
     case 'MajFraisHorsForfait':
         $idFraisHF = filter_input(INPUT_GET, 'idFraisHF', FILTER_SANITIZE_STRING);
         $date = filter_input(INPUT_POST, 'date', FILTER_SANITIZE_STRING);
@@ -85,11 +80,11 @@ switch ($action) {
         $lesMoisVisiteurs = $pdo->getLesMoisDisponibles($_SESSION['idUser']);
         $lesFraisForfait = $pdo->getLesFraisForfait($_SESSION['idUser'], $_SESSION['mois']);
         $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($_SESSION['idUser'], $_SESSION['mois']);
-
         include 'vues/v_listeVisiteurs.php';
         include 'vues/v_etatFraisACorriger.php';
         include 'vues/v_etatFraisHorsForfaitACorriger.php';
         break;
+    
     case 'ValiderFrais':
         $pdo->majEtatFicheFrais($_SESSION['idUser'], $_SESSION['mois'], 'VA');
         $lesMoisVisiteurs = $pdo->getLesMoisDisponibles($_SESSION['idUser']);

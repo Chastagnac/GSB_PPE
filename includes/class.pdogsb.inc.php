@@ -647,8 +647,9 @@ class PdoGsb {
         $requetePrepare->bindParam(':unMois', $mois, PDO::PARAM_STR);
         $requetePrepare->execute();
         $laLigne = $requetePrepare->fetch();
+        var_dump($laLigne);
         switch ($laLigne[0]) {
-            case '4CV Diesel':
+            case '4 CV Diesel':
                 return 0.52;
                 break;
             case '5/6CV Diesel':
@@ -664,7 +665,6 @@ class PdoGsb {
         return $laLigne;
     }
 
-    
     /**
      * Permet de récupérer le véhicule du visiteur pour une fiche d'un mois
      * @param type $id
