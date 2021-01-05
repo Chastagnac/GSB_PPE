@@ -15,6 +15,7 @@
  */
 ?>
 <hr>
+<link href="../styles/style.css" rel="stylesheet" type="text/css"/>
 <div class="panel panel-primary">
     <div class="panel-heading">Fiche de frais du mois 
         <?php echo $numMois . '-' . $numAnnee ?> : </div>
@@ -24,9 +25,8 @@
      
         <strong><u>Montant validé :</u></strong> <?php echo $montantValide ?>
            <?php if ($libEtat == 'Validée et mise en paiement') {
-            ?><a href="./includes/ficheFraisPdf.php">
-                <img src="./images/pdf" alt="pdf" style="width: 35px;
-                     height: 50px; display : block; margin : 10px;"/></a>
+               ?><a href="./includes/ficheFraisPdf.php" target="_blank">
+                <img class="pdfstyle" src="./images/pdf"  alt="pdf"/></a>
                  <?php } ?>
     </div>
 </div>

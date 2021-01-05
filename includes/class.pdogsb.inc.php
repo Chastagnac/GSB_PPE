@@ -106,7 +106,7 @@ class PdoGsb {
                 . 'FROM visiteur '
                 . 'WHERE visiteur.id = :unId '
         );
-             $requetePrepare->bindParam(':unId', $id, PDO::PARAM_STR);
+        $requetePrepare->bindParam(':unId', $id, PDO::PARAM_STR);
         $requetePrepare->execute();
         return $requetePrepare->fetch();
     }
@@ -256,21 +256,23 @@ class PdoGsb {
      *
      * @return null
      */
-    public function majFraisForfait($idVisiteur, $mois, $lesFrais) {
+    public function majFraisForfait($idVisiteur, $mois, $lesFrais, $vehicule) {
         $lesCles = array_keys($lesFrais);
         foreach ($lesCles as $unIdFrais) {
             $qte = $lesFrais[$unIdFrais];
             $requetePrepare = PdoGSB::$monPdo->prepare(
                     'UPDATE lignefraisforfait '
                     . 'SET lignefraisforfait.quantite = :uneQte '
+                    . ', lignefraisforfait.vehicule = :unVehicule '
                     . 'WHERE lignefraisforfait.idvisiteur = :unIdVisiteur '
                     . 'AND lignefraisforfait.mois = :unMois '
-                    . 'AND lignefraisforfait.idfraisforfait = :idFrais'
+                    . 'AND lignefraisforfait.idfraisforfait = :idFrais '
             );
             $requetePrepare->bindParam(':uneQte', $qte, PDO::PARAM_INT);
             $requetePrepare->bindParam(':unIdVisiteur', $idVisiteur, PDO::PARAM_STR);
             $requetePrepare->bindParam(':unMois', $mois, PDO::PARAM_STR);
             $requetePrepare->bindParam(':idFrais', $unIdFrais, PDO::PARAM_STR);
+            $requetePrepare->bindParam(':unVehicule', $vehicule, PDO::PARAM_STR);
             $requetePrepare->execute();
         }
     }
@@ -607,7 +609,7 @@ class PdoGsb {
                 . 'FROM lignefraisforfait WHERE idvisiteur = :unIdVisiteur '
                 . 'AND mois = :unMois AND idfraisforfait = \'ETP\' '
                 . 'UNION '
-                . 'SELECT quantite* :unPirxKLM as prix FROM lignefraisforfait '
+                . 'SELECT quantite* :unPrixKLM as prix FROM lignefraisforfait '
                 . 'WHERE idvisiteur = :unIdVisiteur AND mois = :unMois '
                 . 'AND idfraisforfait = \'KM\' '
                 . 'UNION '
@@ -622,7 +624,7 @@ class PdoGsb {
                 . 'SELECT montant from lignefraishorsforfait '
                 . 'WHERE idvisiteur= :unIdVisiteur and mois = :unMois) as maTable '
         );
-        $requetePrepare->bindParam(':unPirxKLM', $prixKLM, PDO::PARAM_STR);
+        $requetePrepare->bindParam(':unPrixKLM', $prixKLM, PDO::PARAM_STR);
         $requetePrepare->bindParam(':unIdVisiteur', $idVisiteur, PDO::PARAM_STR);
         $requetePrepare->bindParam(':unMois', $mois, PDO::PARAM_STR);
         $requetePrepare->execute();
@@ -635,12 +637,14 @@ class PdoGsb {
      * @param type $id
      * @return le prix klm en fonction du vehicule
      */
-    public function getPrixKLM($id) {
+    public function getPrixKLM($id, $mois) {
         $requetePrepare = PdoGSB::$monPdo->prepare(
-                'SELECT visiteur.vehicule from VISITEUR '
-                . 'WHERE id = :IdVisiteur'
+                'SELECT DISTINCT lignefraisforfait.vehicule from lignefraisforfait '
+                . 'WHERE idvisiteur = :IdVisiteur '
+                . 'AND mois = :unMois'
         );
         $requetePrepare->bindParam(':IdVisiteur', $id, PDO::PARAM_STR);
+        $requetePrepare->bindParam(':unMois', $mois, PDO::PARAM_STR);
         $requetePrepare->execute();
         $laLigne = $requetePrepare->fetch();
         switch ($laLigne[0]) {
@@ -657,6 +661,26 @@ class PdoGsb {
                 return 0.67;
                 break;
         }
+        return $laLigne;
+    }
+
+    
+    /**
+     * Permet de récupérer le véhicule du visiteur pour une fiche d'un mois
+     * @param type $id
+     * @param type $mois
+     * @return Le vehicule du visiteur
+     */
+    public function getVehiculeVisiteur($id, $mois) {
+        $requetePrepare = PdoGSB::$monPdo->prepare(
+                'SELECT DISTINCT lignefraisforfait.vehicule from lignefraisforfait '
+                . 'WHERE idvisiteur = :IdVisiteur '
+                . 'AND mois = :unMois'
+        );
+        $requetePrepare->bindParam(':IdVisiteur', $id, PDO::PARAM_STR);
+        $requetePrepare->bindParam(':unMois', $mois, PDO::PARAM_STR);
+        $requetePrepare->execute();
+        $laLigne = $requetePrepare->fetch();
         return $laLigne;
     }
 

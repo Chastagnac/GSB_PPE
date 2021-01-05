@@ -26,13 +26,13 @@ switch ($action) {
         } else {
 
             $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($_SESSION['idUser'], $moisVisiteur);
-            $prixKLM = $pdo->getPrixKLM($_SESSION['idUser']);
+            $prixKLM = $pdo->getPrixKLM($_SESSION['idUser'],$moisVisiteur);
+            var_dump($prixKLM);
             $prixTotal = $pdo->getPrixFicheFrais($_SESSION['idUser'], $moisVisiteur, $prixKLM);
             $lesMoisVisiteurs = $pdo->getLesMoisDisponibles($_SESSION['idUser']);
 
             $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($_SESSION['idUser'], $moisVisiteur);
             $nbJustificatifs = $lesInfosFicheFrais['nbJustificatifs'];
-            $prixKLM = $pdo->getPrixKLM($_SESSION['idUser']);
 
             $_SESSION['mois'] = $moisVisiteur;
             $_SESSION['nbJustificatifV'] = $nbJustificatifs;
@@ -56,9 +56,11 @@ switch ($action) {
 
     case 'MajFraisForfait':
         $lesFrais = filter_input(INPUT_POST, 'lesFrais', FILTER_DEFAULT, FILTER_FORCE_ARRAY);
+        $vehiculeVisiteur = $pdo->getVehiculeVisiteur($_SESSION['idUser'], $_SESSION['mois']);
+        var_dump($vehiculeVisiteur);
         $lesMoisVisiteurs = $pdo->getLesMoisDisponibles($_SESSION['idUser']);
         if (lesQteFraisValides($lesFrais)) {
-            $pdo->majFraisForfait($_SESSION['idUser'], $_SESSION['mois'], $lesFrais);
+            $pdo->majFraisForfait($_SESSION['idUser'], $_SESSION['mois'], $lesFrais, $vehiculeVisiteur['vehicule']);
         } else {
             ajouterErreur('Les valeurs des frais doivent être numériques');
             include 'vues/v_erreurs.php';

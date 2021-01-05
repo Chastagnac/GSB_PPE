@@ -16,8 +16,8 @@
 }
 .activeorange:hover{
     background-color: #ffa5003f !important;
-    
-    
+
+
 }
 .nav-pills > li.active > .activeorange{
     background-color: orange !important;
@@ -47,4 +47,10 @@
     color: #fff;
     background-color: #5cb85c;
     border-color: #4cae4c;
+}
+
+
+.pdfstyle{
+    width: 35px;
+    height: 50px; display : block; margin : 10px;
 }
