@@ -769,6 +769,16 @@ class PdoGsb {
         $requetePrepare->bindParam(':unIdFraisHf', $idFraisHf, PDO::PARAM_STR);
         $requetePrepare->execute();
     }
+    
+    public function accepterFraisHorsForfait($idFraisHf) {
+        $requetePrepare = PdoGSB::$monPdo->prepare(
+                'UPDATE lignefraishorsforfait '
+                . 'SET etatFraisHf = \'VA\' '
+                . 'WHERE lignefraishorsforfait.id = :unIdFraisHf '
+        );
+        $requetePrepare->bindParam(':unIdFraisHf', $idFraisHf, PDO::PARAM_STR);
+        $requetePrepare->execute();
+    }
 
     /**
      * Permet de retourner l'état du frais hf en cours

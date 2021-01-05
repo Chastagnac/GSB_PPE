@@ -50,6 +50,17 @@ switch ($action) {
         include 'vues/v_etatFraisACorriger.php';
         include 'vues/v_etatFraisHorsForfaitACorriger.php';
         break;
+     case 'accepterFrais':
+        $idFrais = filter_input(INPUT_GET, 'idFrais', FILTER_SANITIZE_STRING);
+        $pdo->accepterFraisHorsForfait($idFrais);
+        $lesMoisVisiteurs = $pdo->getLesMoisDisponibles($_SESSION['idUser']);
+        $prixTotal = $pdo->getPrixFicheFrais($_SESSION['idUser'], $_SESSION['mois'], $_SESSION['prixKLM']);
+        $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($_SESSION['idUser'], $_SESSION['mois']);
+        $lesFraisForfait = $pdo->getLesFraisForfait($_SESSION['idUser'], $_SESSION['mois']);
+        include 'vues/v_listeVisiteurs.php';
+        include 'vues/v_etatFraisACorriger.php';
+        include 'vues/v_etatFraisHorsForfaitACorriger.php';
+        break;
 
     case 'MajFraisForfait':
         $lesFrais = filter_input(INPUT_POST, 'lesFrais', FILTER_DEFAULT, FILTER_FORCE_ARRAY);

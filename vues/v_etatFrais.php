@@ -59,10 +59,11 @@
     <div class="panel-heading">Descriptif des éléments hors forfait - 
         <?php echo $nbJustificatifs ?> justificatifs reçus  
         <?php
-        $i = 0;
+        $i = 0;  
         foreach ($lesFraisHorsForfait as $unFraisHorsForfait) {
-            if ($pdo->estRefuse($unFraisHorsForfait['id']) == 'RE') {
-                $i = $i + 1;
+            $estRefuse = $pdo->estRefuse($unFraisHorsForfait['id']);
+            if ($estRefuse['etatFraisHf'] == 'RE') {
+                $i++;
             }
         }
         if ($i > 0) {
