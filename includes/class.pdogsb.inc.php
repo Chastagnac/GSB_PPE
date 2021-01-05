@@ -622,7 +622,8 @@ class PdoGsb {
                 . 'AND idfraisforfait = \'REP\' '
                 . 'UNION '
                 . 'SELECT montant from lignefraishorsforfait '
-                . 'WHERE idvisiteur= :unIdVisiteur and mois = :unMois) as maTable '
+                . 'WHERE idvisiteur= :unIdVisiteur and mois = :unMois '
+                . 'AND etatFraisHf = \'VA\' ) as maTable '
         );
         $requetePrepare->bindParam(':unPrixKLM', $prixKLM, PDO::PARAM_STR);
         $requetePrepare->bindParam(':unIdVisiteur', $idVisiteur, PDO::PARAM_STR);
@@ -647,7 +648,6 @@ class PdoGsb {
         $requetePrepare->bindParam(':unMois', $mois, PDO::PARAM_STR);
         $requetePrepare->execute();
         $laLigne = $requetePrepare->fetch();
-        var_dump($laLigne);
         switch ($laLigne[0]) {
             case '4 CV Diesel':
                 return 0.52;
@@ -754,6 +754,37 @@ class PdoGsb {
         $requetePrepare->bindParam(':unIdVisiteur', $idVisiteur, PDO::PARAM_STR);
         $requetePrepare->bindParam(':unMois', $mois, PDO::PARAM_STR);
         $requetePrepare->execute();
+    }
+
+    /**
+     * Modifier l'état en refuser d'un frais hors forfait.
+     * @param type $idFraisHf
+     */
+    public function refuserFraisHorsForfait($idFraisHf) {
+        $requetePrepare = PdoGSB::$monPdo->prepare(
+                'UPDATE lignefraishorsforfait '
+                . 'SET etatFraisHf = \'RE\' '
+                . 'WHERE lignefraishorsforfait.id = :unIdFraisHf '
+        );
+        $requetePrepare->bindParam(':unIdFraisHf', $idFraisHf, PDO::PARAM_STR);
+        $requetePrepare->execute();
+    }
+
+    /**
+     * Permet de retourner l'état du frais hf en cours
+     * @param type $idFraisHf
+     * @return deux carractères pour montrer son etat
+     */
+    public function estRefuse($idFraisHf) {
+        $requetePrepare = PdoGSB::$monPdo->prepare(
+                'select etatFraisHf '
+                . 'from lignefraishorsforfait '
+                . 'WHERE lignefraishorsforfait.id = :unIdFraisHf '
+        );
+        $requetePrepare->bindParam(':unIdFraisHf', $idFraisHf, PDO::PARAM_STR);
+        $requetePrepare->execute();
+        $laLigne = $requetePrepare->fetch();
+        return $laLigne;
     }
 
 }

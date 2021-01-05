@@ -22,12 +22,12 @@
     <div class="panel-body">
         <strong><u>Etat :</u></strong> <?php echo $libEtat ?>
         depuis le <?php echo $dateModif ?> <br> 
-     
+
         <strong><u>Montant validé :</u></strong> <?php echo $montantValide ?>
-           <?php if ($libEtat == 'Validée et mise en paiement') {
-               ?><a href="./includes/ficheFraisPdf.php" target="_blank">
+        <?php if ($libEtat == 'Validée et mise en paiement') {
+            ?><a href="./includes/ficheFraisPdf.php" target="_blank">
                 <img class="pdfstyle" src="./images/pdf"  alt="pdf"/></a>
-                 <?php } ?>
+        <?php } ?>
     </div>
 </div>
 <div class="panel panel-info">
@@ -57,26 +57,50 @@
 </div>
 <div class="panel panel-info">
     <div class="panel-heading">Descriptif des éléments hors forfait - 
-        <?php echo $nbJustificatifs ?> justificatifs reçus</div>
-    <table class="table table-bordered table-responsive">
-        <tr>
-            <th class="date">Date</th>
-            <th class="libelle">Libellé</th>
-            <th class='montant'>Montant</th>                
+        <?php echo $nbJustificatifs ?> justificatifs reçus  
+        <?php
+        $i = 0;
+        foreach ($lesFraisHorsForfait as $unFraisHorsForfait) {
+            if ($pdo->estRefuse($unFraisHorsForfait['id']) == 'RE') {
+                $i = $i + 1;
+            }
+        }
+        if ($i > 0) {
+            echo ' - ' . $i . ' Refusé';
+            if ($i > 1) {
+                echo 's';
+            }
+            ?> </div><?php
+    } else {
+        ?></div><?php
+    }
+    ?>
+<table class="table table-bordered table-responsive">
+    <tr>
+        <th class="date">Date</th>
+        <th class="libelle">Libellé</th>
+        <th class='montant'>Montant</th>                
+    </tr>
+    <?php
+    foreach ($lesFraisHorsForfait as $unFraisHorsForfait) {
+        $date = $unFraisHorsForfait['date'];
+        $libelle = htmlspecialchars($unFraisHorsForfait['libelle']);
+        $montant = $unFraisHorsForfait['montant'];
+        $id = $unFraisHorsForfait['id'];
+        $estRefuse = $pdo->estRefuse($id);
+        ?>
+        <?php
+        if ($estRefuse['etatFraisHf'] == 'RE') {
+            ?> <tr  style="background-color: indianred;"><?php
+            } else {
+                ?><tr><?php }
+            ?>
+            <td><?php echo $date ?></td>
+            <td><?php echo $libelle ?></td>
+            <td><?php echo $montant ?></td>
         </tr>
         <?php
-        foreach ($lesFraisHorsForfait as $unFraisHorsForfait) {
-            $date = $unFraisHorsForfait['date'];
-            $libelle = htmlspecialchars($unFraisHorsForfait['libelle']);
-            $montant = $unFraisHorsForfait['montant'];
-            ?>
-            <tr>
-                <td><?php echo $date ?></td>
-                <td><?php echo $libelle ?></td>
-                <td><?php echo $montant ?></td>
-            </tr>
-            <?php
-        }
-        ?>
-    </table>
+    }
+    ?>
+</table>
 </div>
