@@ -19,6 +19,7 @@ $idVisiteur = $_SESSION['idVisiteur'];
 
 
 
+
 switch ($action) {
     case 'selectionnerMois':
         $lesMois = $pdo->getLesMoisDisponiblesAll($idVisiteur);
@@ -31,7 +32,6 @@ switch ($action) {
         break;
     case 'voirEtatFrais':
         $leMois = filter_input(INPUT_POST, 'lstMois', FILTER_SANITIZE_STRING);
-        
         $lesMois = $pdo->getLesMoisDisponiblesAll($idVisiteur);
         $moisASelectionner = $leMois;
         include 'vues/v_listeMois.php';

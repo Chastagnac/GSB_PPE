@@ -48,6 +48,6 @@ switch ($uc) {
         break;
     case 'deconnexion':
         include 'controleurs/c_deconnexion.php';
-        break;    
+        break;
 }
 require 'vues/v_pied.php';
