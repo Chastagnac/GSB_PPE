@@ -25,7 +25,7 @@
 
         <strong><u>Montant validé :</u></strong> <?php echo $montantValide ?>
         <?php if ($libEtat == 'Validée et mise en paiement') {
-            ?><a href="./includes/ficheFraisPdf.php" target="_blank">
+            ?><a href="index.php?uc=etatFrais&action=afficherPdf&mois=<?php echo $leMois ?>" target="_blank">
                 <img class="pdfstyle" src="./images/pdf"  alt="pdf"/></a>
         <?php } ?>
     </div>
@@ -59,7 +59,7 @@
     <div class="panel-heading">Descriptif des éléments hors forfait - 
         <?php echo $nbJustificatifs ?> justificatifs reçus  
         <?php
-        $i = 0;  
+        $i = 0;
         foreach ($lesFraisHorsForfait as $unFraisHorsForfait) {
             $estRefuse = $pdo->estRefuse($unFraisHorsForfait['id']);
             if ($estRefuse['etatFraisHf'] == 'RE') {
@@ -104,4 +104,3 @@
     }
     ?>
 </table>
-</div>

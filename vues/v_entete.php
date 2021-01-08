@@ -14,7 +14,6 @@
  * @link      http://www.reseaucerta.org Contexte « Laboratoire GSB »
  */
 ?>
-<!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -77,7 +76,7 @@
                 ?>   
                 <div class="header">
                     <div class="row vertical-align">
-                    <div class="col-md-4">
+                        <div class="col-md-4">
                             <h1>
                                 <img src="./images/logo.jpg" class="img-responsive" 
                                      alt="Laboratoire Galaxy-Swiss Bourdin" 
@@ -129,4 +128,3 @@
                 </h1>
                 <?php
             }
-            
