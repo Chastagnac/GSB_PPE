@@ -6,6 +6,9 @@ require('fct.inc.php');
 
 class PDF extends FPDF {
 
+    /**
+     * Fonction Header avec le logo gsb et le titre du pdf 
+     */
     function Header() {
         // Logo
         $this->Image('../images/logo.jpg', 90, 10, 30);
@@ -24,13 +27,51 @@ class PDF extends FPDF {
         return $this->SetTextColor(31, 73, 125);
     }
 
+    /**
+     * Fonction qui met en forme le tableau des frais hors forfait avec la date,
+     * le libellé et le montant
+     * @param type $lesFraisHorsForfait tableaux de frais hors forfait
+     */
+    function AffichageFraisHorsForfait($lesFraisHorsForfait) {
+        //Ligne frais hors forfait
+        $this->BleuGsb();
+        $this->Cell(90, 10, '', 'L', 0, '');
+        $this->Cell(0, 10, 'Autres Frais', 'R', 1, '');
+        $this->SetFont('Arial', 'I', 11);
+        $this->Cell(15, 10, '', 'L', 0, '');
+        $this->SetDrawColor(31, 73, 125);
+        //1er ligne du tableau (en tete avec libelle)
+        $this->Cell(35, 10, 'Date', 'LBT', 0, 'C');
+        $this->Cell(100, 10, 'Libelle', 'TB', 0, 'C');
+        $this->Cell(30, 10, 'Montant', 'TBR', 0, 'C');
+        $this->SetDrawColor(0);
+        $this->Cell(0, 10, '', 'R', 1, '');
+        //Création des colonnes pour chaque frais hors forfait
+        foreach ($lesFraisHorsForfait as $unFraisHorsForfait) {
+            $date = $unFraisHorsForfait['date'];
+            $libelle = htmlspecialchars($unFraisHorsForfait['libelle']);
+            $montant = $unFraisHorsForfait['montant'];
+            $this->Cell(15, 10, '', 'L', 0, '');
+            $this->SetDrawColor(31, 73, 125);
+            $this->SetTextColor(0);
+            $this->Cell(35, 10, $date, 'LBT', 0, 'C');
+            $this->Cell(100, 10, $libelle, 'LTBR', 0, 'C');
+            $this->Cell(30, 10, $montant, 'TBR', 0, 'C');
+            $this->SetDrawColor(0);
+            $this->Cell(0, 10, '', 'R', 1, '');
+        }
+    }
+    function Signature(){
+        $this->BleuGsb();
+        $this->Cell(0,10,'Signature','',1,'R');
+        $this->Image('../images/signatureComptable.jpg', 175, 225, 30);
+    }
 }
 
 session_start();
 $pdf = new PDF();
 $pdf->AddPage();
 $noir = 0;
-//$pdo = new PdoGsb;
 $instancePdoGsb = PdoGsb::getPdoGsb();
 $pdo = $instancePdoGsb;
 $leMois = $_SESSION['mois'];
@@ -38,8 +79,9 @@ $numAnnee = substr($leMois, 0, 4);
 $numMois = substr($leMois, 4, 2);
 $idVisiteur = $_SESSION['idVisiteur'];
 $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $leMois);
-$totalNuit = number_format($lesFraisForfait[2][2]*80,2,'.','');
-$totaltrepas = number_format($lesFraisForfait[3][2]*29,2,'.','');
+$lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois);
+$totalNuit = number_format($lesFraisForfait[2][2] * 80, 2, '.', '');
+$totaltrepas = number_format($lesFraisForfait[3][2] * 29, 2, '.', '');
 
 /**
  * Nom, Prénom
@@ -114,19 +156,10 @@ $pdf->Cell(70, 10, '', 'LTBR', 0, 'R');
 $pdf->Cell(30, 10, '', 'TBR', 0, 'R');
 $pdf->SetDrawColor($noir);
 $pdf->Cell(0, 10, '', 'R', 1, '');
-/*
- * Ligne frais
- */
-$pdf->BleuGsb();
-$pdf->Cell(80,10,'','L',0,'');
-$pdf->Cell(0,10,'Autres Frais','R',1,'');
-$pdf->SetFont('Arial', 'I', 11);
-$pdf->Cell(15, 10, '', 'L', 0, '');
-$pdf->SetDrawColor(31, 73, 125);
-$pdf->Cell(35, 10, 'Date', 'LBT', 0, 'C');
-$pdf->Cell(100, 10, 'Libelle', 'TB', 0, 'C');
-$pdf->Cell(30, 10, 'Montant', 'TBR', 0, 'C');
-$pdf->SetDrawColor($noir);
-$pdf->Cell(0, 10, '', 'R', 1, '');
+//Appel de la fonction pour mettre en forme le tableau des frais hors forfait
+$pdf->AffichageFraisHorsForfait($lesFraisHorsForfait);
+$pdf->Cell(0, 5, '', 'BRL', 1, '');
+//Appel fonction signature
+$pdf->Signature();
 $pdf->Output();
 ?>
