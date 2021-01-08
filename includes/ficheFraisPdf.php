@@ -18,8 +18,8 @@ class PDF extends FPDF {
         $this->SetTextColor(31, 73, 125);
         $this->Cell(0, 10, 'ETAT DE FRAIS ENGAGES', 'TRL', 1, 'C');
         $this->SetFont('Arial', 'I', 10);
-        $this->Cell(0, 15, 'A retourner accompagné des justificatifs au plus tard le '
-                . '10 du mois qui suit l\'engagement de frais', 'RL', 0, 'C');
+        $this->Cell(0, 15, utf8_decode('A retourner accompagné des justificatifs au plus tard le '
+                . '10 du mois qui suit l\'engagement de frais') , 'RL', 0, 'C');
         $this->Ln(15);
     }
 
@@ -42,7 +42,7 @@ class PDF extends FPDF {
         $this->SetDrawColor(31, 73, 125);
         //1er ligne du tableau (en tete avec libelle)
         $this->Cell(35, 10, 'Date', 'LBT', 0, 'C');
-        $this->Cell(100, 10, 'Libelle', 'TB', 0, 'C');
+        $this->Cell(100, 10, utf8_decode('Libéllé') , 'TB', 0, 'C');
         $this->Cell(30, 10, 'Montant', 'TBR', 0, 'C');
         $this->SetDrawColor(0);
         $this->Cell(0, 10, '', 'R', 1, '');
@@ -55,7 +55,7 @@ class PDF extends FPDF {
             $this->SetDrawColor(31, 73, 125);
             $this->SetTextColor(0);
             $this->Cell(35, 10, $date, 'LBT', 0, 'C');
-            $this->Cell(100, 10, $libelle, 'LTBR', 0, 'C');
+            $this->Cell(100, 10, utf8_decode($libelle), 'LTBR', 0, 'C');
             $this->Cell(30, 10, $montant, 'TBR', 0, 'C');
             $this->SetDrawColor(0);
             $this->Cell(0, 10, '', 'R', 1, '');
@@ -95,7 +95,7 @@ $pdf->Cell(30, 10, 'Visiteur', 'L', 0, 'C');
 $pdf->SetTextColor($noir);
 $pdf->Cell(0, 10, "Nom : " . $_SESSION['nom'], 'R', 1, 'L');
 $pdf->Cell(30, 10, '', 'L', 0, '');
-$pdf->Cell(0, 5, "Prenom : " . $_SESSION['prenom'], 'R', 1, 'L');
+$pdf->Cell(0, 5, utf8_decode("Prénom : ")  . $_SESSION['prenom'], 'R', 1, 'L');
 /**
  * Mois 
  */
@@ -112,7 +112,7 @@ $pdf->Cell(15, 10, '', 'L', 0, '');
 $pdf->BleuGsb();
 $pdf->SetDrawColor(31, 73, 125);
 $pdf->Cell(35, 10, 'Frais Forfaitaires', 'LTB', 0, '');
-$pdf->Cell(30, 10, 'Quantite', 'TB', 0, 'C');
+$pdf->Cell(30, 10, utf8_decode('Quantité') , 'TB', 0, 'C');
 $pdf->Cell(70, 10, 'Montant unitaire', 'TB', 0, 'C');
 $pdf->Cell(30, 10, 'Total', 'TBR', 0, 'C');
 $pdf->SetDrawColor($noir);
@@ -159,7 +159,10 @@ $pdf->Cell(0, 10, '', 'R', 1, '');
 //Appel de la fonction pour mettre en forme le tableau des frais hors forfait
 $pdf->AffichageFraisHorsForfait($lesFraisHorsForfait);
 $pdf->Cell(0, 5, '', 'BRL', 1, '');
-//Appel fonction signature
+//Appel fonction signature avec le l'image signature
 $pdf->Signature();
+
+
+
 $pdf->Output();
 ?>
