@@ -32,6 +32,7 @@ switch ($action) {
         break;
     case 'voirEtatFrais':
         $leMois = filter_input(INPUT_POST, 'lstMois', FILTER_SANITIZE_STRING);
+        //$_SESSION['mois'] = $leMois;
         $lesMois = $pdo->getLesMoisDisponiblesAll($idVisiteur);
         $moisASelectionner = $leMois;
         include 'vues/v_listeMois.php';
@@ -47,4 +48,3 @@ switch ($action) {
         include 'vues/v_etatFrais.php';
         break;
 }
-

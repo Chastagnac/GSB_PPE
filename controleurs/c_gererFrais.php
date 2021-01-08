@@ -27,8 +27,13 @@ switch ($action) {
         break;
     case 'validerMajFraisForfait':
         $lesFrais = filter_input(INPUT_POST, 'lesFrais', FILTER_DEFAULT, FILTER_FORCE_ARRAY);
-        if (lesQteFraisValides($lesFrais)) {
-            $pdo->majFraisForfait($idVisiteur, $mois, $lesFrais);
+        
+        
+        $vehicule = filter_input(INPUT_POST, 'vehicule', FILTER_SANITIZE_STRING);
+        var_dump($vehicule);
+        
+        if (lesQteFraisValides($lesFrais) && $vehicule > 0) {
+            $pdo->majFraisForfait($idVisiteur, $mois, $lesFrais,$vehicule);
         } else {
             ajouterErreur('Les valeurs des frais doivent être numériques');
             include 'vues/v_erreurs.php';

@@ -6,7 +6,7 @@
         <form method="post" 
               action="index.php?uc=controlerFrais&action=MajFraisForfait" 
               role="form" style="width:200px;">
-            <fieldset>       
+            <fieldset>
                 <?php
                 foreach ($lesFraisForfait as $unFrais) {
                     $idFrais = $unFrais['idfrais'];

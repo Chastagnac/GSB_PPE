@@ -16,18 +16,37 @@
             $date = $unFraisHorsForfait['date'];
             $montant = $unFraisHorsForfait['montant'];
             $id = $unFraisHorsForfait['id'];
+            $estRefuse = $pdo->estRefuse($id);
             $total = 0
-            ?>
+            ?>  
+
             <form method="post" 
                   action="index.php?uc=controlerFrais&action=MajFraisHorsForfait&idFraisHF=<?php echo $id ?>">
-                <tr>
+                      <?php if ($estRefuse['etatFraisHf'] == 'RE') {
+                          ?> <tr  style="background-color: indianred;"><?php
+                } else {
+                    ?><tr><?php
+                        }
+                        ?>
+
                     <td><input type="text" value="<?php echo $date ?>" name="date" size="10"></td>
                     <td><input type="text" value="<?php echo $libelle ?>"name="libelle" size="50"></td>
                     <td><input type="text" value="<?php echo $montant ?>" name="montant" size="10"></td>
                     <td>
                         <button class="btn btn-success"
                                 type="submit" onclick="return confirm('Voulez-vous vraiment mettre à jours ce frais hors forfait ?');">Corriger</button>
-                        <button class="btn btn-danger" type="reset">Reset</button></td>
+
+                        <?php
+                        if ($estRefuse['etatFraisHf'] == 'RE') {
+                            ?>
+                        <td><a href="index.php?uc=controlerFrais&action=accepterFrais&idFrais=<?php echo $id ?>" class="btn btn-primary" 
+                               onclick="return confirm('Voulez-vous vraiment annuler le refus ce frais?');">Accepter ce frais</a></td><?php
+                        } else {
+                            ?>
+                        <td><a href="index.php?uc=controlerFrais&action=refuserFrais&idFrais=<?php echo $id ?>" class="btn btn-warning" 
+                               onclick="return confirm('Voulez-vous vraiment refuser ce frais?');">Refuser ce frais</a></td><?php
+                        }
+                        ?>
                 </tr>
             </form>
             <?php
@@ -38,14 +57,14 @@
 </div>
 
 <div class="form-group">
-    Nombre total en euros : <?php echo  $prixTotal[0]?> € <br>
+    Nombre total en euros : <?php echo round($prixTotal[0], 2) ?> € <br>
     Nombre de justificatifs : <?php echo $_SESSION['nbJustificatifV'] ?>
 </div>
 <form method="post" 
       action="index.php?uc=controlerFrais&action=ValiderFrais" 
       role="form" style="width:200px;">
-    
-    <button class="btn btn-success" type="submit">Valider la fiche de frais</button>
+
+    <button class="btn btn-success" type="submit" onclick="return confirm('Voulez-vous vraiment valider la fiche de frais ?');">Valider la fiche de frais</button>
 </form>
 
 
