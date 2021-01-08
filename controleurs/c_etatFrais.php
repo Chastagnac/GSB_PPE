@@ -54,6 +54,7 @@ switch ($action) {
             $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois);
             $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $leMois);
             $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur, $leMois);
+            $prixKLM['prixKLM'] = $pdo->getPrixKLM($idVisiteur, $leMois);
             $nomVisiteur = $_SESSION['nom'];
             $prenomVisiteur = $_SESSION['prenom'];
             $totalNuit = number_format($lesFraisForfait[2][2] * 80, 2, '.', '');
@@ -63,7 +64,7 @@ switch ($action) {
             $numMois = substr($leMois, 4, 2);
             include 'fpdf/ficheFraisPdf.php';
         }
-        header('Location: ../fpdf/pdf/' . $name, false);
+        header('Location: ../fpdf/pdf/' . $name);
 
 
         break;

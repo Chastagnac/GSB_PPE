@@ -25,7 +25,7 @@ class PDF extends FPDF {
         return $this->SetTextColor(31, 73, 125);
     }
 
-    function Content($idVisiteur, $nomVisiteur, $leMois, $lesFraisHorsForfait, $lesFraisForfait, $totalNuit, $totalRepas,$noir,$numAnnee,$numMois) {
+    function Content($idVisiteur, $nomVisiteur, $leMois, $lesFraisHorsForfait, $lesFraisForfait, $totalNuit, $totalRepas,$noir,$numAnnee,$numMois,$prixKLM) {
         /**
          * Nom, Prénom
          */
@@ -96,7 +96,7 @@ class PDF extends FPDF {
         $this->Cell(35, 10, 'Kilometrage', 'LBR', 0, 'C');
         $this->Cell(30, 10, $lesFraisForfait[1][2], 'TB', 0, 'C');
         $this->Cell(70, 10, '', 'LTBR', 0, 'R');
-        $this->Cell(30, 10, '', 'TBR', 0, 'R');
+        $this->Cell(30, 10, $prixKLM, 'TBR', 0, 'R');
         $this->SetDrawColor($noir);
         $this->Cell(0, 10, '', 'R', 1, '');
 //Appel de la fonction pour mettre en forme le tableau des frais hors forfait
@@ -152,6 +152,6 @@ class PDF extends FPDF {
 
 $pdf = new PDF();
 $pdf->AddPage();
-$pdf->Content($idVisiteur, $nomVisiteur, $leMois, $lesFraisHorsForfait, $lesFraisForfait, $totalNuit, $totalRepas,$noir,$numAnnee,$numMois);
+$pdf->Content($idVisiteur, $nomVisiteur, $leMois, $lesFraisHorsForfait, $lesFraisForfait, $totalNuit, $totalRepas,$noir,$numAnnee,$numMois,$prixKLM);
 $pdf->Output('F', 'fpdf/pdf/' . $name);
 ?>

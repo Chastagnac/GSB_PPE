@@ -649,7 +649,7 @@ class PdoGsb {
         $requetePrepare->execute();
         $laLigne = $requetePrepare->fetch();
         switch ($laLigne[0]) {
-            case '4 CV Diesel':
+            case '4CV Diesel':
                 return 0.52;
                 break;
             case '5/6CV Diesel':
