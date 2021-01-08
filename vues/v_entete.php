@@ -14,7 +14,6 @@
  * @link      http://www.reseaucerta.org Contexte « Laboratoire GSB »
  */
 ?>
-
 <html>
     <head>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">

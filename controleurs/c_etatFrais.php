@@ -32,7 +32,7 @@ switch ($action) {
         break;
     case 'voirEtatFrais':
         $leMois = filter_input(INPUT_POST, 'lstMois', FILTER_SANITIZE_STRING);
-        //$_SESSION['mois'] = $leMois;
+        $_SESSION['mois'] = $leMois;
         $lesMois = $pdo->getLesMoisDisponiblesAll($idVisiteur);
         $moisASelectionner = $leMois;
         include 'vues/v_listeMois.php';
@@ -46,5 +46,25 @@ switch ($action) {
         $nbJustificatifs = $lesInfosFicheFrais['nbJustificatifs'];
         $dateModif = dateAnglaisVersFrancais($lesInfosFicheFrais['dateModif']);
         include 'vues/v_etatFrais.php';
+        break;
+        case 'afficherPdf':
+        $leMois = filter_input(INPUT_GET, 'mois', FILTER_SANITIZE_STRING);
+        $name = $idVisiteur . $leMois . '.pdf';
+        if (!file_exists('fpdf/pdf/' . $name)) {
+            $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois);
+            $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $leMois);
+            $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur, $leMois);
+            $nomVisiteur = $_SESSION['nom'] ;
+            $prenomVisiteur = $_SESSION['prenom']; 
+            $totalNuit = number_format($lesFraisForfait[2][2] * 80, 2, '.', '');
+            $totalRepas = number_format($lesFraisForfait[3][2] * 29, 2, '.', '');
+            $noir = 0;
+            $numAnnee = substr($leMois, 0, 4);
+            $numMois = substr($leMois, 4, 2);
+            include 'fpdf/ficheFraisPdf.php';
+        }
+        header("Refresh: 0;URL=../fpdf/pdf/" . $name);
+
+
         break;
 }

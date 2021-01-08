@@ -769,7 +769,7 @@ class PdoGsb {
         $requetePrepare->bindParam(':unIdFraisHf', $idFraisHf, PDO::PARAM_STR);
         $requetePrepare->execute();
     }
-    
+
     public function accepterFraisHorsForfait($idFraisHf) {
         $requetePrepare = PdoGSB::$monPdo->prepare(
                 'UPDATE lignefraishorsforfait '
@@ -796,5 +796,60 @@ class PdoGsb {
         $laLigne = $requetePrepare->fetch();
         return $laLigne;
     }
+        /**
+     * Hash les mots de passe non hashé des visiteurs en bdd
+     */
+    public static function hashPasswordsVisiteurs()
+    {
+        if (PdoGsb::$monPdoGsb == null) {
+            PdoGsb::$monPdoGsb = new PdoGsb();
+        }
 
+        $sql = "SELECT * FROM `visiteur`";
+        $requetePrepare = PdoGSB::$monPdo->prepare($sql);
+        $requetePrepare->execute();
+        $tableauResult = $requetePrepare->fetchALL(PDO::FETCH_ASSOC);
+
+        foreach ($tableauResult as $ligne) {
+            if (strlen($ligne["mdp"]) !== 64) {
+                $pwdHashed = hash("sha256", $ligne["mdp"]);
+                $sql = "update visiteur set mdp = '" . $pwdHashed
+                    . "' where id = '" . $ligne["id"] . "'";
+                $requetePrepare = PdoGSB::$monPdo->prepare($sql);
+                $requetePrepare->execute();
+                echo "Visiteur hashé <br>";
+            }
+        }
+
+        echo "Visiteurs c'est hashé <br>";
+    }
+
+    /**
+     * Hash les mots de passe non hashé des comptables en bdd 
+     */
+    public static function hashPasswordsComptables()
+    {
+        if (PdoGsb::$monPdoGsb == null) {
+            PdoGsb::$monPdoGsb = new PdoGsb();
+        }
+
+        $sql = "SELECT * FROM `comptable`";
+        $requetePrepare = PdoGSB::$monPdo->prepare($sql);
+        $requetePrepare->execute();
+        $tableauResult = $requetePrepare->fetchALL(PDO::FETCH_ASSOC);
+
+        foreach ($tableauResult as $ligne) {
+            if (strlen($ligne["mdp"]) !== 64) {
+                $pwdHashed = hash("sha256", $ligne["mdp"]);
+                $sql = "update comptable set mdp = '" . $pwdHashed
+                    . "' where id = '" . $ligne["id"] . "'";
+                $requetePrepare = PdoGSB::$monPdo->prepare($sql);
+                $requetePrepare->execute();
+                echo "Comptable hashé <br>";
+            }
+        }
+
+        echo "Comptables c'est hashé <br>";
+    }
 }
+    
