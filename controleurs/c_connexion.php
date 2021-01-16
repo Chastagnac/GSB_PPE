@@ -26,8 +26,9 @@ switch ($action) {
     case 'valideConnexion':
         $login = filter_input(INPUT_POST, 'login', FILTER_SANITIZE_STRING);
         $mdp = filter_input(INPUT_POST, 'mdp', FILTER_SANITIZE_STRING);
+        var_dump($_POST);
         $visiteur = $pdo->getInfosVisiteur($login, $mdp);
-        $comptable = $pdo->getInfosComptable($login, hash("sha256", $mdp));
+        $comptable = $pdo->getInfosComptable($login, $mdp);
         if (is_array($visiteur)) {
             $id = $visiteur['id'];
             $nom = $visiteur['nom'];

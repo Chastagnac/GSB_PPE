@@ -573,6 +573,7 @@ class PdoGsb {
                 'SELECT DISTINCT visiteur.id as idVisiteurVA, visiteur.nom as nom, visiteur.prenom'
                 . ' as prenom from visiteur inner join fichefrais ON visiteur.id = fichefrais.idvisiteur'
                 . ' WHERE fichefrais.idetat = \'VA\' '
+                . ' ORDER by nom '
         );
         $requetePrepare->bindParam(':unId', $id, PDO::PARAM_INT);
         $requetePrepare->execute();

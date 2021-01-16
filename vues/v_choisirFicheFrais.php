@@ -1,5 +1,4 @@
-
-<hr>
+<h2 style="color : orange;">Mettre en paiement la fiche de frais</h2><hr>
 <div class="panel panel-primary comptable" style="width: 50%; text-align: center; 
      margin : auto; margin-bottom: 20px;">
     <div class="panel-heading comptable1">Fiche de frais du mois 
@@ -37,7 +36,7 @@
 </div>
 <div class="panel panel-info comptable">
     <div class="panel-heading comptable1">Descriptif des éléments hors forfait - 
-<?php echo $nbJustificatifs ?> justificatifs reçus</div>
+        <?php echo $nbJustificatifs ?> justificatifs reçus</div>
     <table class="table table-bordered table-responsive">
         <tr>
             <th class="date">Date</th>
@@ -53,8 +52,8 @@
             $estRefuse = $pdo->estRefuse($id);
             ?>
             <?php
-                if ($estRefuse['etatFraisHf'] == 'RE') {
-                    ?> <tr  style="background-color: indianred;"><?php
+            if ($estRefuse['etatFraisHf'] == 'RE') {
+                ?> <tr  style="background-color: indianred;"><?php
             } else {
                 ?><tr><?php }
             ?>
@@ -62,9 +61,9 @@
                 <td><?php echo $libelle ?></td>
                 <td><?php echo $montant ?></td>
             </tr>
-    <?php
-}
-?>
+            <?php
+        }
+        ?>
     </table>
 </div>
 <form method="post" 
