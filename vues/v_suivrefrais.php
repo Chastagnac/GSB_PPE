@@ -1,4 +1,3 @@
-<h1>Suivi du paiement des fiches de frais</h1>
 <link rel="stylesheet" href="../styles/style.css">
 <div class="row">
     <div class="row">
@@ -43,7 +42,7 @@
                         $mois = $unMois['mois'];
                         $numAnnee = $unMois['numAnnee'];
                         $numMois = $unMois['numMois'];
-                        if ($mois == $moisVisiteur) {
+                        if ($mois == $_SESSION['mois']) {
                             ?>
                             <option selected value="<?php echo $mois ?>">
                                 <?php echo $numMois . '/' . $numAnnee ?> </option>
@@ -56,7 +55,6 @@
                         }
                     }
                     ?>  
-
                 </select>
                 <br>
                 <input id="ok" type="submit" value="Afficher Détails" class="btn btn-success" 
