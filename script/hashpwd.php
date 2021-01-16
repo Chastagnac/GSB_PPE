@@ -5,4 +5,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+require_once '../includes/class.pdogsb.inc.php';
+PdoGsb::hashPasswordsVisiteurs();
+PdoGsb::hashPasswordsComptables();
