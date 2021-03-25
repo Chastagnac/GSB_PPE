@@ -36,7 +36,7 @@ switch ($action) {
             ajouterErreur('Les valeurs des frais doivent être numériques');
             include 'vues/v_erreurs.php';
         }
-        break;
+        break;  
     case 'validerCreationFrais':
         $dateFrais = filter_input(INPUT_POST, 'dateFrais', FILTER_SANITIZE_STRING);
         $libelle = filter_input(INPUT_POST, 'libelle', FILTER_SANITIZE_STRING);
