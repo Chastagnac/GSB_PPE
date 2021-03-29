@@ -303,7 +303,7 @@ class PdoGsb {
      * @return null
      */
     public function majNbJustificatifs($idVisiteur, $mois, $nbJustificatifs) {
-        $requetePrepare = PdoGB::$monPdo->prepare(
+        $requetePrepare = PdoGSB::$monPdo->prepare(
                 'UPDATE fichefrais '
                 . 'SET nbjustificatifs = :unNbJustificatifs '
                 . 'WHERE fichefrais.idvisiteur = :unIdVisiteur '
@@ -811,7 +811,6 @@ class PdoGsb {
         $requetePrepare = PdoGSB::$monPdo->prepare($sql);
         $requetePrepare->execute();
         $tableauResult = $requetePrepare->fetchALL(PDO::FETCH_ASSOC);
-
         foreach ($tableauResult as $ligne) {
             if (strlen($ligne["mdp"]) !== 64) {
                 $pwdHashed = hash("sha256", $ligne["mdp"]);
