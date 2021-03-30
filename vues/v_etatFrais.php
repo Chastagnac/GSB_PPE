@@ -24,7 +24,7 @@
         depuis le <?php echo $dateModif ?> <br> 
 
         <strong><u>Montant validé :</u></strong> <?php echo $montantValide ?>
-        <?php if ($libEtat == 'Validée et mise en paiement') {
+        <?php if ($libEtat == 'Mise en paiement') {
             ?><a href="index.php?uc=etatFrais&action=afficherPdf&mois=<?php echo $leMois ?>" target="_blank">
                 <img class="pdfstyle" src="./images/pdf"  alt="pdf"/></a>
         <?php } ?>
