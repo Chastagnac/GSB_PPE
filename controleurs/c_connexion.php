@@ -27,7 +27,7 @@ switch ($action) {
         $login = filter_input(INPUT_POST, 'login', FILTER_SANITIZE_STRING);
         $mdp = filter_input(INPUT_POST, 'mdp', FILTER_SANITIZE_STRING);
         $visiteur = $pdo->getInfosVisiteur($login, $mdp);
-        $comptable = $pdo->getInfosComptable($login, $mdp);//Tâche 1
+        $comptable = $pdo->getInfosComptable($login, hash("sha256", $mdp));
         if (is_array($visiteur)) {
             $id = $visiteur['id'];
             $nom = $visiteur['nom'];

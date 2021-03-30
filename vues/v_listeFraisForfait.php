@@ -28,9 +28,25 @@
                 foreach ($lesFraisForfait as $unFrais) {
                     $idFrais = $unFrais['idfrais'];
                     $libelle = htmlspecialchars($unFrais['libelle']);
-                    $quantite = $unFrais['quantite']; ?>
-                    <div class="form-group">
-                        <label for="idFrais"><?php echo $libelle ?></label>
+                    $quantite = $unFrais['quantite'];
+                    ?>
+                    <div class = "form-group">
+                        <label for = "idFrais"><?php echo $libelle
+                    ?></label>
+                        <?php
+                        if ($libelle == 'Frais Kilométrique') {
+                            ?>  
+                            <select name = "vehicule" class = "col-md-4" style="width: 59%;float: right;">
+                                <option value = "">Choisissez votre véhicule</option>
+                                <option value = '4CV Diesel'>Véhicule 4CV Diesel</option>
+                                <option value = '5/6CV Diesel'>Véhicule 5/6CV Diesel</option>
+                                <option value = '4CV Essence'>Véhicule 4CV Essence</option>
+                                <option value = '5/6CV Essence'>Véhicule 5/6CV Essence</option>
+                            </select>
+                            <?php
+                        }
+                        ?>
+
                         <input type="text" id="idFrais" 
                                name="lesFrais[<?php echo $idFrais ?>]"
                                size="10" maxlength="5" 
@@ -46,3 +62,5 @@
         </form>
     </div>
 </div>
+
+

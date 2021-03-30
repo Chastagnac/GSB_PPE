@@ -14,7 +14,6 @@
  * @link      http://www.reseaucerta.org Contexte « Laboratoire GSB »
  */
 ?>
-<!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -77,7 +76,7 @@
                 ?>   
                 <div class="header">
                     <div class="row vertical-align">
-                    <div class="col-md-4">
+                        <div class="col-md-4">
                             <h1>
                                 <img src="./images/logo.jpg" class="img-responsive" 
                                      alt="Laboratoire Galaxy-Swiss Bourdin" 
@@ -87,26 +86,29 @@
                         <div class="col-md-8">
                             <ul class="nav nav-pills pull-right"role="tablist">
                                 <li <?php if (!$uc || $uc == 'accueil') { ?>class="active" <?php } ?>>
-                                    <a href="index.php">
+                                    <a href="index.php" class="texteorange activeorange">
                                         <span class="glyphicon glyphicon-home"></span>
                                         Accueil
                                     </a>
                                 </li>
                                 <li <?php if ($uc == 'controlerFrais') { ?>class="active"<?php } ?>>
-                                    <a href="index.php?uc=controlerFrais&action=selectionnerVisiteurs">
-                                        <span class="glyphicon glyphicon-pencil"></span>
+                                    <a href="index.php?uc=controlerFrais&action=validerUtilisateur" 
+                                       class="texteorange activeorange">
+                                        <span class="glyphicon glyphicon-ok"></span>
                                         Valider les fiches de frais
                                     </a>
                                 </li>
-                                <li <?php if ($uc == 'controlerFrais') { ?>class="active"<?php } ?>>
-                                    <a href="index.php?uc=suivreFrais&action=selectionnerVisiteurs">
-                                        <span class="glyphicon glyphicon-list-alt"></span>
+                                <li <?php if ($uc == 'suivreFrais') { ?>class="active"<?php } ?>>
+                                    <a href="index.php?uc=suivreFrais&action=choisirVisiteur" 
+                                       class="texteorange activeorange">
+                                        <span class="glyphicon glyphicon-euro"></span>
                                         Suivre le paiement des fiches de frais
                                     </a>
                                 </li>
                                 <li 
                                     <?php if ($uc == 'deconnexion') { ?>class="active"<?php } ?>>
-                                    <a href="index.php?uc=deconnexion&action=demandeDeconnexion">
+                                    <a href="index.php?uc=deconnexion&action=demandeDeconnexion" 
+                                       class="texteorange activeorange"> 
                                         <span class="glyphicon glyphicon-log-out"></span>
                                         Déconnexion
                                     </a>

@@ -1,11 +1,12 @@
 
 <div class="row">  
+    <h2 style="color : orange;">Valider la fiche de frais</h2>
     <h3>Eléments forfaitisés</h3>
     <div class="col-md-4">
         <form method="post" 
-              action="index.php?uc=validerFrais=corrigerFrais" 
-              role="form">
-            <fieldset>       
+              action="index.php?uc=controlerFrais&action=MajFraisForfait" 
+              role="form" style="width:200px;">
+            <fieldset>
                 <?php
                 foreach ($lesFraisForfait as $unFrais) {
                     $idFrais = $unFrais['idfrais'];
@@ -23,10 +24,11 @@
                     <?php
                 }
                 ?>
-                <button class="btn btn-success" type="submit">Ajouter</button>
-                <button class="btn btn-danger" type="reset">Effacer</button>
+                <button class="btn btn-success" type="submit">Corriger</button>
+                <button class="btn btn-danger" type="reset">Reset</button>
             </fieldset>
         </form>
     </div>
 </div>
+
 
