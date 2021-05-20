@@ -2,10 +2,13 @@
 
 $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
 $lesVisiteurs = $pdo->getUtilisateursDisponibles();
+$displayNone = false;
 switch ($action) {
-
     case 'validerUtilisateur':
         $idVisiteur = filter_input(INPUT_POST, 'idVisiteur', FILTER_SANITIZE_STRING);
+        if(!$idVisiteur) {
+            $displayNone = true;
+        }
         $_SESSION['idUser'] = $idVisiteur;
         if (count($lesVisiteurs) == 0) {
             include 'vues/v_listeVisiteurs.php';

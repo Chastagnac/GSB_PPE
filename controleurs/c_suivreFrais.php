@@ -6,10 +6,14 @@
  * and open the template in the editor.
  */
 $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
+$displayNone = false;
 switch ($action) {
     case 'choisirVisiteur':
         $lesVisiteursVA = $pdo->getUtilisateursVA();
         $idVisiteur = filter_input(INPUT_POST, 'idVisiteurVA', FILTER_SANITIZE_STRING);
+        if(!$idVisiteur) {
+            $displayNone = true;
+        }
         $_SESSION['idUser'] = $idVisiteur;
         $lesMoisUtilisateurs = $pdo->getLesMoisDisponiblesVA($idVisiteur);
         include 'vues/v_suivrefrais.php';
