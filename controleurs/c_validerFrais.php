@@ -100,6 +100,7 @@ switch ($action) {
         break;
 
     case 'ValiderFrais':
+        $displayNone = true;
         $pdo->majEtatFicheFrais($_SESSION['idUser'], $_SESSION['mois'], 'VA');
         $lesMoisVisiteurs = $pdo->getLesMoisDisponibles($_SESSION['idUser']);
         $lesFraisForfait = $pdo->getLesFraisForfait($_SESSION['idUser'], $_SESSION['mois']);

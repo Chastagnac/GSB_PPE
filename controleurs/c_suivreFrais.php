@@ -43,6 +43,8 @@ switch ($action) {
         break;
 
     case 'miseEnPaiement':
+        
+        $displayNone = true;
         $pdo->majEtatFicheFrais($_SESSION['idUser'], $_SESSION['mois'], 'MP');
         $lesMoisUtilisateurs = $pdo->getLesMoisDisponiblesVA($_SESSION['idUser']);
         $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($_SESSION['idUser'], $_SESSION['mois']);
