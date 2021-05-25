@@ -2,10 +2,13 @@
 
 $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING);
 $lesVisiteurs = $pdo->getUtilisateursDisponibles();
+$displayNone = false;
 switch ($action) {
-
     case 'validerUtilisateur':
         $idVisiteur = filter_input(INPUT_POST, 'idVisiteur', FILTER_SANITIZE_STRING);
+        if(!$idVisiteur) {
+            $displayNone = true;
+        }
         $_SESSION['idUser'] = $idVisiteur;
         if (count($lesVisiteurs) == 0) {
             include 'vues/v_listeVisiteurs.php';
@@ -97,6 +100,7 @@ switch ($action) {
         break;
 
     case 'ValiderFrais':
+        $displayNone = true;
         $pdo->majEtatFicheFrais($_SESSION['idUser'], $_SESSION['mois'], 'VA');
         $lesMoisVisiteurs = $pdo->getLesMoisDisponibles($_SESSION['idUser']);
         $lesFraisForfait = $pdo->getLesFraisForfait($_SESSION['idUser'], $_SESSION['mois']);
